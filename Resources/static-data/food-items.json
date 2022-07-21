@@ -1,0 +1,13 @@
+﻿{
+  "Food": [
+    {
+      "Name": "Hamburger"
+    },
+    {
+      "Name": "Hot Dog"
+    },
+    {
+      "Name": "Funnel Cake"
+    }
+  ]
+}
