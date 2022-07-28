@@ -33,6 +33,9 @@ namespace FossFoodV1.Orders
 
             var t = h.View.FindViewById<TextView>(Resource.Id.cardOrderWithToppings_ItemType);
             t.Text = item.OrderItemType.ToString().Replace("_", " ");
+
+            var l = h.View.FindViewById<ListView>(Resource.Id.order_item_toppings);
+            l.Adapter = new ArrayAdapter(_activity, Resource.Layout.order_item_toppings, new List<string> { "• cheese" });
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -45,11 +48,13 @@ namespace FossFoodV1.Orders
         public void AddItem(OrderWithToppings item)
         {
             _items.Add(item);
+            NotifyDataSetChanged();
         }
 
         public void RemoveItem(int position)
         {
-            _items.RemoveAt(position); 
+            _items.RemoveAt(position);
+            NotifyDataSetChanged();
         }
     }
 

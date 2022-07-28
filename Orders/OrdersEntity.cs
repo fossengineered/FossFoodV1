@@ -13,6 +13,8 @@ namespace FossFoodV1.Orders
 {
     internal class OrdersEntity
     {
+        public List<string> GetOrderItemTypes() => Enum.GetNames(typeof(OrderItemTypes)).OrderBy(a => a).ToList();
+
 
     }
 }

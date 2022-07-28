@@ -154,7 +154,6 @@
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\layout\food_main.xml">
       <SubType>Designer</SubType>
@@ -167,6 +166,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\order_item.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\order_select_item.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\order_item_toppings.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>
