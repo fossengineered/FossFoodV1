@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.Widget;
+using AndroidX.RecyclerView.Widget;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,9 +20,17 @@ namespace FossFoodV1.Orders
             var orderButton = activity.FindViewById<AppCompatButton>(Resource.Id.btn_add_order_item);
             orderButton.Click += (a, b) => { activity.StartActivity(new Intent(activity, typeof(FoodActivity))); };
 
-            var orderItems = activity.FindViewById<ListView>(Resource.Id.order_items);
-            var items = new List<string> { "1", "two" };
-            orderItems.Adapter = new ArrayAdapter(activity, Resource.Layout.order_item, items);
+            var recycler = activity.FindViewById<RecyclerView>(Resource.Id.order_items);
+
+            var layoutManager = new LinearLayoutManager(activity) { Orientation = LinearLayoutManager.Vertical };
+            recycler.SetLayoutManager(layoutManager);
+            recycler.HasFixedSize = true;
+
+            var recyclerViewData = new List<OrderWithToppings>();
+
+            var adapter = new OrdersWithToppingsRecyclerAdapter(recyclerViewData, activity);
+            
+            recycler.SetAdapter(adapter);
         }
     }
 }

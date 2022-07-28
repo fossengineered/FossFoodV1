@@ -11,8 +11,6 @@ namespace FossFoodV1
     public class MainActivity : AppCompatActivity
     {
         OrdersViewModels _ordersVM;
-        System.Collections.Generic.List<string> items;
-
 
         protected override void OnCreate(Bundle savedInstanceState)
         {

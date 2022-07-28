@@ -75,6 +75,7 @@
     <Compile Include="Orders\OrdersEntity.cs" />
     <Compile Include="Orders\OrdersModels.cs" />
     <Compile Include="Orders\OrdersViewModels.cs" />
+    <Compile Include="Orders\OrdersWithToppingsRecycler.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

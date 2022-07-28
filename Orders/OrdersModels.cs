@@ -11,8 +11,19 @@ using System.Text;
 
 namespace FossFoodV1.Orders
 {
-    internal class OrdersModels
+    public class OrderWithToppings
     {
+       public OrderItemTypes OrderItemType { get; set; }
 
+    }
+
+    public enum OrderItemTypes
+    {
+       Burger_Thornton,
+       Burger_Single,
+       Funnel_Cake_Classic,
+       Fried_Oreos,
+       Hotdog,
+       Fries
     }
 }

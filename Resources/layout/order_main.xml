@@ -12,13 +12,26 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:id="@+id/order_name"
-        android:hint="@string/placeholder_name"/>
-    <ListView
+        android:hint="@string/placeholder_name"
+        android:layout_marginBottom="20px"/>
+    <TextView
+        android:text="Order Items"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView1"
+       />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#c0c0c0"/>
+    <androidx.recyclerview.widget.RecyclerView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/order_items" />
+        android:id="@+id/order_items"
+        android:layout_marginBottom="20px"/>
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
