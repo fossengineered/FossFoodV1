@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:minWidth="25px"
     android:minHeight="25px"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/cardOrderWithToppings"
-    >
+    android:layout_width="300px"
+    android:layout_height="wrap_content"
+    app:cardElevation="2dp"
+    android:id="@+id/cardOrderWithToppings">
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+            android:background="@drawable/layout_border"
+        android:padding="15px"
+        android:layout_marginBottom="20px"
         android:id="@+id/linearLayout1">
         <TextView
             android:text="Large Text"

@@ -13,31 +13,14 @@
         android:minHeight="25px"
         android:id="@+id/order_name"
         android:hint="@string/placeholder_name"
-        android:layout_marginBottom="20px"/>
-    <TextView
-        android:text="Order Items"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView1"
-       />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#c0c0c0"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/order_items"
-        android:layout_marginBottom="20px"/>
+        android:layout_marginBottom="40px"/>
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40px"
         android:id="@+id/linearLayout1"
         android:theme="@style/Button.Blue">
         <Button
@@ -53,4 +36,82 @@
             android:id="@+id/button2"
             android:theme="@style/Button.Green"/>
     </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout3">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="@dimen/order_item_width"
+            android:layout_height="wrap_content"
+        >
+            <TextView
+                android:text="@string/order_items"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="@dimen/order_item_width"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView1"/>
+            <View
+                android:layout_width="@dimen/order_item_width"
+                android:layout_height="2dp"
+                android:layout_marginBottom="10px"
+                android:background="#c0c0c0"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_marginLeft="20px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:text="@string/selected_items_toppings"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginBottom="10px"
+                android:background="#c0c0c0"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout2">
+        <ScrollView
+            android:layout_width="@dimen/order_item_width"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="false"
+            android:id="@+id/scrollView1">
+            <androidx.recyclerview.widget.RecyclerView
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="40px"
+                android:padding="15px"
+                android:id="@+id/order_items"/>
+        </ScrollView>
+        <ScrollView
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadeScrollbars="false"
+            android:id="@+id/scrollView2">
+
+        </ScrollView>
+    </LinearLayout>
+
 </LinearLayout>
