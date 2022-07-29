@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.Widget;
 using AndroidX.RecyclerView.Widget;
+using Google.Android.Material.FloatingActionButton;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace FossFoodV1.Orders
             
             recycler.SetAdapter(adapter);
 
-            var orderButton = activity.FindViewById<AppCompatButton>(Resource.Id.btn_add_order_item);
+            var orderButton = activity.FindViewById<FloatingActionButton>(Resource.Id.btn_add_order_item);
             orderButton.Click += (a, b) => {
                 ShowSelectItemDialog((itemId) =>
                 adapter.AddItem(new OrderWithToppings { OrderItemType = OrderItemTypes.Hotdog }));
