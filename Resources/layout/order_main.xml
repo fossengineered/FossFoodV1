@@ -12,15 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="30px">
-        <EditText
-            android:inputType="textPersonName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <LinearLayout
+            android:orientation="horizontal"
             android:minWidth="25px"
             android:minHeight="25px"
-            android:id="@+id/order_name"
-            android:hint="@string/placeholder_name"
-            android:layout_marginBottom="40px"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50px"
+            android:id="@+id/linearLayout5">
+            <TextView
+                android:text="@string/placeholder_name"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:id="@+id/textView2" />
+            <EditText
+                android:inputType="textPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:id="@+id/order_name"
+                android:imeOptions="actionDone"
+                android:hint="" />
+        </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
             android:minWidth="25px"
@@ -71,6 +87,8 @@
             android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:id="@+id/linearLayout2">
             <ScrollView
                 android:layout_width="@dimen/order_item_width"
@@ -103,24 +121,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:id="@+id/linearLayout4">   
+        android:id="@+id/linearLayout4">
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_add_order_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:tint="@android:color/white"/>
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btn_add_order_item_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_menu_send"
+            android:id="@+id/btn_add_order_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:tint="@android:color/white"/>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_add_order_item_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_menu_send"
             android:tint="@android:color/white"
-        android:theme="@style/Button.Green"/>
-        </LinearLayout>
+            android:theme="@style/Button.Green"/>
+    </LinearLayout>
 
-    
+
 </FrameLayout>
 
