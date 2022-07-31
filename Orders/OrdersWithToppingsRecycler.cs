@@ -35,7 +35,7 @@ namespace FossFoodV1.Orders
             t.Text = item.OrderItemType.ToString().Replace("_", " ");
 
             var l = h.View.FindViewById<ListView>(Resource.Id.order_item_toppings);
-            l.Adapter = new ArrayAdapter(_activity, Resource.Layout.order_item_toppings, new List<string> { "• cheese" });
+            l.Adapter = new ArrayAdapter(_activity, Resource.Layout.order_item_toppings, new List<string> { "no toppings" });
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

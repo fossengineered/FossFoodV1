@@ -35,8 +35,15 @@ namespace FossFoodV1.Orders
 
             var orderButton = activity.FindViewById<FloatingActionButton>(Resource.Id.btn_add_order_item);
             orderButton.Click += (a, b) => {
-                ShowSelectItemDialog((itemId) =>
-                adapter.AddItem(new OrderWithToppings { OrderItemType = OrderItemTypes.Hotdog }));
+
+                ShowSelectItemDialog((itemId) => {
+                    
+                    var item = Enum.GetNames(typeof(OrderItemTypes)).OrderBy(x => x).ToArray()[itemId];
+
+                    adapter.AddItem(new OrderWithToppings { OrderItemType = (OrderItemTypes)Enum.Parse(typeof(OrderItemTypes), item) });
+
+                });
+
             };
         }
 
