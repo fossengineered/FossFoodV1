@@ -18,7 +18,7 @@ namespace FossFoodV1.Orders
         List<OrderWithToppings> _items;
         Activity _activity;
 
-        public OrdersWithToppingsRecyclerAdapter(List<OrderWithToppings> items, Activity activity)
+        public OrdersWithToppingsRecyclerAdapter(List<OrderWithToppings> items, Activity activity, Action<int> onItemClick)
         {
             _items = items;
             _activity = activity;
@@ -35,7 +35,40 @@ namespace FossFoodV1.Orders
             t.Text = item.OrderItemType.ToString().Replace("_", " ");
 
             var l = h.View.FindViewById<ListView>(Resource.Id.order_item_toppings);
-            l.Adapter = new ArrayAdapter(_activity, Resource.Layout.order_item_toppings, new List<string> { "no toppings" });
+
+            if (item.Toppings == null || item.Toppings.Count == 0)
+                l.Adapter = new ArrayAdapter(_activity, Resource.Layout.order_item_toppings, new List<string> { "no toppings" });
+            else
+                l.Adapter = new ArrayAdapter(
+                    _activity,
+                    Resource.Layout.order_item_toppings,
+                    item.Toppings.Select(a=>a.ToString().Replace("_", " ")).ToArray());
+
+            var b = h.View.FindViewById<ImageView>(Resource.Id.delRowBtn);            
+
+            b.Click -= B_Click;
+            b.Click += B_Click;
+
+            h.View.Click -= View_Click;
+            h.View.Click += View_Click;
+        }
+
+        private void B_Click(object sender, EventArgs e)
+        {
+            var p = _activity.FindViewById<RecyclerView>(Resource.Id.order_items);
+            var r = (View)((View)((ImageView)sender).Parent).Parent;
+
+            int position = p.GetChildAdapterPosition(r);
+
+            RemoveItem(position);  
+
+            Toast toast = Toast.MakeText(_activity.ApplicationContext, $"delete: {position}", ToastLength.Short);
+            toast.Show();
+        }
+
+        private void View_Click(object sender, EventArgs e)
+        {
+            int position = _activity.FindViewById<RecyclerView>(Resource.Id.order_items).GetChildAdapterPosition((View)sender);
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -47,7 +80,7 @@ namespace FossFoodV1.Orders
 
         public void AddItem(OrderWithToppings item)
         {
-            _items.Add(item);
+            _items = _items.Prepend(item).ToList();
             NotifyDataSetChanged();
         }
 

@@ -26,5 +26,10 @@
 		<item name="colorAccent">@color/colorAccent</item>
 		<item name="android:layout_marginRight">20px</item>
 	</style>
+
+	<style name="Button.Red" parent="ThemeOverlay.AppCompat">
+		<item name="colorAccent">@android:color/holo_red_light</item>
+		<item name="android:layout_marginRight">20px</item>
+	</style>
 	
 </resources>

@@ -14,7 +14,7 @@ namespace FossFoodV1.Orders
     public class OrderWithToppings
     {
        public OrderItemTypes OrderItemType { get; set; }
-
+        public List<OrderToppingTypes> Toppings { get; set; }
     }
 
     public enum OrderItemTypes
@@ -25,5 +25,17 @@ namespace FossFoodV1.Orders
        Fried_Oreos,
        Hotdog,
        Fries
+    }
+
+    public enum OrderToppingTypes
+    {
+        Cheese_Nacho,
+        Cheese_American_Yellow,
+        Cheese_American_White,
+        Chili,
+        Lettuce,
+        Tomato,
+        Pickles
+
     }
 }

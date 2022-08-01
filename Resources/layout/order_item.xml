@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:minWidth="25px"
     android:minHeight="25px"
-    android:layout_width="300px"
-    android:layout_height="wrap_content"
+    
+    android:layout_height="wrap_content"    
     app:cardElevation="2dp"
     android:id="@+id/cardOrderWithToppings">
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-            android:background="@drawable/layout_border"
+        android:background="@drawable/layout_border"
         android:padding="15px"
         android:layout_marginBottom="20px"
+        android:layout_width="@dimen/order_item_width"
         android:id="@+id/linearLayout1">
+        <ImageView
+                android:id="@+id/delRowBtn"
+                app:srcCompat="@android:drawable/ic_menu_delete"
+                android:tint="@android:color/holo_red_dark"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:contentDescription=""/>
         <TextView
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/cardOrderWithToppings_ItemType" />
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="15px"
+                android:id="@+id/cardOrderWithToppings_ItemType" />
         <TextView
             android:text="@string/toppings"
             android:textAppearance="?android:attr/textAppearanceSmall"

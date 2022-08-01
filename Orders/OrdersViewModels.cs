@@ -29,7 +29,7 @@ namespace FossFoodV1.Orders
             recycler.SetLayoutManager(layoutManager);
             recycler.HasFixedSize = true;
 
-            var adapter = new OrdersWithToppingsRecyclerAdapter(_recyclerViewData, activity);
+            var adapter = new OrdersWithToppingsRecyclerAdapter(_recyclerViewData, activity, (itemPosition) => { });
             
             recycler.SetAdapter(adapter);
 

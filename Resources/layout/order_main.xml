@@ -60,7 +60,7 @@
                     android:layout_width="@dimen/order_item_width"
                     android:layout_height="2dp"
                     android:layout_marginBottom="10px"
-                    android:background="#c0c0c0"/>
+                    android:background="@color/colorAccent"/>
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -78,7 +78,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginBottom="10px"
-                    android:background="#c0c0c0"/>
+                    android:background="@color/colorAccent"/>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
