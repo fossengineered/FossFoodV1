@@ -29,7 +29,7 @@ namespace FossFoodV1.Orders
             recycler.SetLayoutManager(layoutManager);
             recycler.HasFixedSize = true;
 
-            var adapter = new OrdersWithToppingsRecyclerAdapter(_recyclerViewData, activity, (itemPosition) => { });
+            var adapter = new OrdersWithToppingsRecyclerAdapter(_recyclerViewData, activity, HandleSelectToppings);
             
             recycler.SetAdapter(adapter);
 
@@ -45,6 +45,12 @@ namespace FossFoodV1.Orders
                 });
 
             };
+        }
+
+        void HandleSelectToppings(List<OrderToppingTypes> selectedToppings)
+        {
+            Toast toast = Toast.MakeText(_activity.ApplicationContext, $"toppings", ToastLength.Short);
+            toast.Show();
         }
 
         public void ShowSelectItemDialog(Action<int> onItemSelected)

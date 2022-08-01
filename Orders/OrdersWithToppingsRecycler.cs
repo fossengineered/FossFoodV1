@@ -17,11 +17,13 @@ namespace FossFoodV1.Orders
     {
         List<OrderWithToppings> _items;
         Activity _activity;
+        Action<List<OrderToppingTypes>> _showToppingsCallback;
 
-        public OrdersWithToppingsRecyclerAdapter(List<OrderWithToppings> items, Activity activity, Action<int> onItemClick)
+        public OrdersWithToppingsRecyclerAdapter(List<OrderWithToppings> items, Activity activity, Action<List<OrderToppingTypes>> showToppingsCallback)
         {
             _items = items;
             _activity = activity;
+            _showToppingsCallback = showToppingsCallback;
         }
 
         public override int ItemCount => _items.Count;
@@ -69,6 +71,8 @@ namespace FossFoodV1.Orders
         private void View_Click(object sender, EventArgs e)
         {
             int position = _activity.FindViewById<RecyclerView>(Resource.Id.order_items).GetChildAdapterPosition((View)sender);
+
+            _showToppingsCallback(_items[position].Toppings ?? new List<OrderToppingTypes>());
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
