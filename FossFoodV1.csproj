@@ -75,6 +75,7 @@
     <Compile Include="Orders\OrdersModels.cs" />
     <Compile Include="Orders\OrdersViewModels.cs" />
     <Compile Include="Orders\OrdersWithToppingsRecycler.cs" />
+    <Compile Include="Orders\SelectToppingsRecycler.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -180,6 +181,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\layout_border.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\order_select_toppings.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

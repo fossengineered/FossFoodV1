@@ -23,21 +23,33 @@ namespace FossFoodV1.Orders
         {
             _activity = activity;
 
-            var recycler = activity.FindViewById<RecyclerView>(Resource.Id.order_items);
+            OrdersWithToppingsRecyclerAdapter adapter = InitOrderRecycler(activity);
+            SelectToppingsRecyclerAdapter toppingAdapter = InitToppingRecycler(activity);
 
+            InitOrderBtn(activity, adapter);
+        }
+
+        private SelectToppingsRecyclerAdapter InitToppingRecycler(Activity activity)
+        {
+            var toppingRecycler = activity.FindViewById<RecyclerView>(Resource.Id.selected_toppings);
             var layoutManager = new LinearLayoutManager(activity) { Orientation = LinearLayoutManager.Vertical };
-            recycler.SetLayoutManager(layoutManager);
-            recycler.HasFixedSize = true;
+            toppingRecycler.SetLayoutManager(layoutManager);
+            toppingRecycler.HasFixedSize = true;
 
-            var adapter = new OrdersWithToppingsRecyclerAdapter(_recyclerViewData, activity, HandleSelectToppings);
-            
-            recycler.SetAdapter(adapter);
+            var adapter = new SelectToppingsRecyclerAdapter(activity, (a) => { });
+            toppingRecycler.SetAdapter(adapter);
+            return adapter;
+        }
 
+        private void InitOrderBtn(Activity activity, OrdersWithToppingsRecyclerAdapter adapter)
+        {
             var orderButton = activity.FindViewById<FloatingActionButton>(Resource.Id.btn_add_order_item);
-            orderButton.Click += (a, b) => {
+            orderButton.Click += (a, b) =>
+            {
 
-                ShowSelectItemDialog((itemId) => {
-                    
+                ShowSelectItemDialog((itemId) =>
+                {
+
                     var item = Enum.GetNames(typeof(OrderItemTypes)).OrderBy(x => x).ToArray()[itemId];
 
                     adapter.AddItem(new OrderWithToppings { OrderItemType = (OrderItemTypes)Enum.Parse(typeof(OrderItemTypes), item) });
@@ -45,6 +57,20 @@ namespace FossFoodV1.Orders
                 });
 
             };
+        }
+
+        private OrdersWithToppingsRecyclerAdapter InitOrderRecycler(Activity activity)
+        {
+            var orderItemRecycler = activity.FindViewById<RecyclerView>(Resource.Id.order_items);
+
+            var layoutManager = new LinearLayoutManager(activity) { Orientation = LinearLayoutManager.Vertical };
+            orderItemRecycler.SetLayoutManager(layoutManager);
+            orderItemRecycler.HasFixedSize = true;
+
+            var adapter = new OrdersWithToppingsRecyclerAdapter(_recyclerViewData, activity, HandleSelectToppings);
+
+            orderItemRecycler.SetAdapter(adapter);
+            return adapter;
         }
 
         void HandleSelectToppings(List<OrderToppingTypes> selectedToppings)
