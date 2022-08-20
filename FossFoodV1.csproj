@@ -66,6 +66,12 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BtPrintActivity.cs" />
+    <Compile Include="BtPrinting\AndroidBlueToothService.cs" />
+    <Compile Include="BtPrinting\BtPrintingEntity.cs" />
+    <Compile Include="BtPrinting\Command.cs" />
+    <Compile Include="BtPrinting\IBlueToothService.cs" />
+    <Compile Include="BtPrinting\PrintPageViewModel.cs" />
     <Compile Include="FoodActivity.cs" />
     <Compile Include="Food\FoodEntities.cs" />
     <Compile Include="Food\FoodModels.cs" />

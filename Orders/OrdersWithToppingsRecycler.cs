@@ -10,20 +10,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static Android.Views.View;
 
 namespace FossFoodV1.Orders
 {
     public class OrdersWithToppingsRecyclerAdapter : RecyclerView.Adapter
     {
-        List<OrderWithToppings> _items;
+        public List<OrderWithToppings> _items;
         Activity _activity;
-        Action<List<OrderToppingTypes>> _showToppingsCallback;
+        Action<OrderWithToppings, int> _onOrderItemSelected;
 
-        public OrdersWithToppingsRecyclerAdapter(List<OrderWithToppings> items, Activity activity, Action<List<OrderToppingTypes>> showToppingsCallback)
+        public OrdersWithToppingsRecyclerAdapter(List<OrderWithToppings> items, Activity activity, Action<OrderWithToppings,int> onOrderItemSelected)
         {
             _items = items;
             _activity = activity;
-            _showToppingsCallback = showToppingsCallback;
+            _onOrderItemSelected = onOrderItemSelected;
         }
 
         public override int ItemCount => _items.Count;
@@ -39,12 +40,21 @@ namespace FossFoodV1.Orders
             var l = h.View.FindViewById<ListView>(Resource.Id.order_item_toppings);
 
             if (item.Toppings == null || item.Toppings.Count == 0)
+            {
                 l.Adapter = new ArrayAdapter(_activity, Resource.Layout.order_item_toppings, new List<string> { "no toppings" });
+                l.RequestLayout();
+            }
             else
+            {
                 l.Adapter = new ArrayAdapter(
                     _activity,
                     Resource.Layout.order_item_toppings,
-                    item.Toppings.Select(a=>a.ToString().Replace("_", " ")).ToArray());
+                    item.Toppings.Select(a => a.ToString().Replace("_", " ")).ToArray());
+
+
+                l.LayoutParameters.Height = CalculateHeight(l);
+                l.RequestLayout();
+            }
 
             var b = h.View.FindViewById<ImageView>(Resource.Id.delRowBtn);            
 
@@ -53,6 +63,30 @@ namespace FossFoodV1.Orders
 
             h.View.Click -= View_Click;
             h.View.Click += View_Click;
+        }
+
+        private int CalculateHeight(ListView list)
+        {
+
+            int height = 0;
+
+            for (int i = 0; i < list.Count; i++)
+            {
+                View childView = list.Adapter.GetView(i, null, list);
+                childView.Measure(MeasureSpec.MakeMeasureSpec(0, MeasureSpecMode.Unspecified), MeasureSpec.MakeMeasureSpec(0, MeasureSpecMode.Unspecified));
+                height += childView.MeasuredHeight;
+            }
+
+            //dividers height
+            height += list.DividerHeight * list.Count;
+
+            return height;
+        }
+
+        internal void UpdateItem(OrderWithToppings item, int curreOrderItemPosition)
+        {
+            _items[curreOrderItemPosition] = item;
+            NotifyDataSetChanged();
         }
 
         private void B_Click(object sender, EventArgs e)
@@ -72,7 +106,7 @@ namespace FossFoodV1.Orders
         {
             int position = _activity.FindViewById<RecyclerView>(Resource.Id.order_items).GetChildAdapterPosition((View)sender);
 
-            _showToppingsCallback(_items[position].Toppings ?? new List<OrderToppingTypes>());
+            _onOrderItemSelected(_items[position], position);
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

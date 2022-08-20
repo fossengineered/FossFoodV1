@@ -18,15 +18,18 @@ namespace FossFoodV1.Orders
     {
         Activity _activity;
         List<OrderWithToppings>  _recyclerViewData = new List<OrderWithToppings>();
+        SelectToppingsRecyclerAdapter _toppingAdapter;
+        OrdersWithToppingsRecyclerAdapter _orderItemAdapter;
+        int _curreOrderItemPosition;
+
 
         public OrdersViewModels(Activity activity)
         {
             _activity = activity;
 
-            OrdersWithToppingsRecyclerAdapter adapter = InitOrderRecycler(activity);
-            SelectToppingsRecyclerAdapter toppingAdapter = InitToppingRecycler(activity);
+            _orderItemAdapter = InitOrderRecycler(activity);
 
-            InitOrderBtn(activity, adapter);
+            InitOrderBtn(activity, _orderItemAdapter);
         }
 
         private SelectToppingsRecyclerAdapter InitToppingRecycler(Activity activity)
@@ -36,7 +39,16 @@ namespace FossFoodV1.Orders
             toppingRecycler.SetLayoutManager(layoutManager);
             toppingRecycler.HasFixedSize = true;
 
-            var adapter = new SelectToppingsRecyclerAdapter(activity, (a) => { });
+            var adapter = new SelectToppingsRecyclerAdapter(activity, (topping) => {
+                var item = _orderItemAdapter._items[_curreOrderItemPosition];
+
+                if (item.Toppings.Contains(topping))
+                    item.Toppings = item.Toppings.Except(new List<OrderToppingTypes> { topping }).ToList();
+                else
+                    item.Toppings.Add(topping);
+
+                _orderItemAdapter.UpdateItem(item, _curreOrderItemPosition);
+            });
             toppingRecycler.SetAdapter(adapter);
             return adapter;
         }
@@ -52,8 +64,18 @@ namespace FossFoodV1.Orders
 
                     var item = Enum.GetNames(typeof(OrderItemTypes)).OrderBy(x => x).ToArray()[itemId];
 
-                    adapter.AddItem(new OrderWithToppings { OrderItemType = (OrderItemTypes)Enum.Parse(typeof(OrderItemTypes), item) });
+                    var order = new OrderWithToppings { 
+                        OrderItemType = (OrderItemTypes)Enum.Parse(typeof(OrderItemTypes), item),
+                        Toppings = new List<OrderToppingTypes>()
+                    };
 
+                    adapter.AddItem(order);
+
+                    if(_toppingAdapter == null)
+                        _toppingAdapter = InitToppingRecycler(activity);
+
+                    _toppingAdapter.OrderItemSelected(order.Toppings);
+                    _curreOrderItemPosition = 0;
                 });
 
             };
@@ -67,16 +89,20 @@ namespace FossFoodV1.Orders
             orderItemRecycler.SetLayoutManager(layoutManager);
             orderItemRecycler.HasFixedSize = true;
 
-            var adapter = new OrdersWithToppingsRecyclerAdapter(_recyclerViewData, activity, HandleSelectToppings);
+            var adapter = new OrdersWithToppingsRecyclerAdapter(_recyclerViewData, activity, HandleOrderItemSelected);
 
             orderItemRecycler.SetAdapter(adapter);
             return adapter;
         }
 
-        void HandleSelectToppings(List<OrderToppingTypes> selectedToppings)
+        void HandleOrderItemSelected(OrderWithToppings selectedOrderItem, int position)
         {
-            Toast toast = Toast.MakeText(_activity.ApplicationContext, $"toppings", ToastLength.Short);
-            toast.Show();
+
+            _toppingAdapter.OrderItemSelected(selectedOrderItem.Toppings);
+            _curreOrderItemPosition = position;
+
+            //Toast toast = Toast.MakeText(_activity.ApplicationContext, $"toppings", ToastLength.Short);
+            //toast.Show();
         }
 
         public void ShowSelectItemDialog(Action<int> onItemSelected)

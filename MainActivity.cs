@@ -9,6 +9,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using FossFoodV1.Orders;
 using System;
+using XFBluetoothPrint.Droid;
 
 namespace FossFoodV1
 {
@@ -22,8 +23,23 @@ namespace FossFoodV1
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.order_main);
-            
-           
+
+            FindViewById<Button>(Resource.Id.btn_print).Click += (a, b) =>
+            {
+                var list = new AndroidBlueToothService().GetDeviceList();
+
+                if (list == null || list.Count == 0)
+                {
+                    Toast.MakeText(Application.Context, "No Devices", ToastLength.Long).Show();
+                    
+                    return;
+                }
+
+                Toast.MakeText(Application.Context, list[0], ToastLength.Long).Show();
+
+                new AndroidBlueToothService().Print(list[0], "It Prints!!!");
+            };
+
             _ordersVM = new OrdersViewModels(this);
         }
 

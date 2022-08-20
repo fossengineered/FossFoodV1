@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:minWidth="25px"
     android:minHeight="25px"
-    
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"    
     app:cardElevation="2dp"
     android:id="@+id/cardOrderWithToppings">
@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/layout_border"
         android:padding="15px"
         android:layout_marginBottom="20px"
@@ -40,10 +40,11 @@
             android:layout_height="match_parent"
             android:id="@+id/textView1" />
         <ListView
+            android:duplicateParentState="true"
             android:minWidth="25px"
             android:minHeight="25px"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:listSelector="@android:color/transparent"
             android:id="@+id/order_item_toppings" />
     </LinearLayout>
