@@ -77,6 +77,7 @@
     <Compile Include="Food\FoodModels.cs" />
     <Compile Include="Food\FoodRenderer.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="Orders\CompleteOrderActivity.cs" />
     <Compile Include="Orders\OrdersEntity.cs" />
     <Compile Include="Orders\OrdersModels.cs" />
     <Compile Include="Orders\OrdersViewModels.cs" />
@@ -192,6 +193,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\order_select_toppings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\order_complete_order.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

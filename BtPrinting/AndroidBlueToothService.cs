@@ -42,7 +42,6 @@ namespace XFBluetoothPrint.Droid
                 byte[] buffer = Encoding.UTF8.GetBytes(text);
                 bluetoothSocket?.OutputStream.Write(buffer, 0, buffer.Length);
                 bluetoothSocket?.OutputStream.WriteByte(0x0A);
-                //private static  byte NL = 0x0A;
 
                 bluetoothSocket.Close();
 

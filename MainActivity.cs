@@ -24,20 +24,22 @@ namespace FossFoodV1
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.order_main);
 
-            FindViewById<Button>(Resource.Id.btn_print).Click += (a, b) =>
+            FindViewById<Button>(Resource.Id.btn_complete_order).Click += (a, b) =>
             {
-                var list = new AndroidBlueToothService().GetDeviceList();
+                var intent = new Intent(ApplicationContext, typeof(CompleteOrderActivity));
+                StartActivity(intent);
+                //var list = new AndroidBlueToothService().GetDeviceList();
 
-                if (list == null || list.Count == 0)
-                {
-                    Toast.MakeText(Application.Context, "No Devices", ToastLength.Long).Show();
+                //if (list == null || list.Count == 0)
+                //{
+                //    Toast.MakeText(Application.Context, "No Devices", ToastLength.Long).Show();
                     
-                    return;
-                }
+                //    return;
+                //}
 
-                Toast.MakeText(Application.Context, list[0], ToastLength.Long).Show();
+                //Toast.MakeText(Application.Context, list[0], ToastLength.Long).Show();
 
-                new AndroidBlueToothService().Print(list[0], "It Prints!!!");
+                //new AndroidBlueToothService().Print(list[0], "It Prints!!!");
             };
 
             _ordersVM = new OrdersViewModels(this);

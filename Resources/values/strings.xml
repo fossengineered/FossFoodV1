@@ -6,11 +6,14 @@
 	<string name="placeholder_name">Customer Name</string>
 	<string name="add_item">Add Item</string>
 	<string name="pay">Pay</string>
+	<string name="done">Done</string>
 	<string name="toppings">Toppings</string>
+	<string name="pager_num">Pager Number</string>
 	<string name="order_items">
 		<b>Current Order Items</b>
 	</string>
 	<string name="selected_items_toppings">
 		<b>Selected Item Toppings</b>
 	</string>
+	<string name="complete_order">Complete Order</string>
 </resources>

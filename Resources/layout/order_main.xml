@@ -1,29 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:minWidth="25px"
-    android:minHeight="25px"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/frameLayout1">
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:text="@string/complete_order"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:foregroundGravity="right"
+                    android:layout_gravity="right"
+                    android:theme="@style/Button.Green"
+                    android:id="@+id/btn_complete_order" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:padding="30px">
-        <Button
-            android:text="Print"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn_print" />
+
         <LinearLayout
             android:orientation="horizontal"
             android:minWidth="25px"
             android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50px"
+            android:layout_marginBottom="15px"
             android:id="@+id/linearLayout5">
             <TextView
                 android:text="@string/placeholder_name"
@@ -41,6 +63,27 @@
                 android:id="@+id/order_name"
                 android:imeOptions="actionDone"
                 android:hint="" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="50px"
+            android:id="@+id/linearLayout6" >
+            <TextView
+                android:text="@string/pager_num"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/textView3" />
+            <EditText
+                android:inputType="number"
+                android:layout_width="200px"
+                android:layout_height="match_parent"
+                android:imeOptions="actionDone"
+                android:id="@+id/pager_num" />
         </LinearLayout>
         <LinearLayout
             android:orientation="horizontal"
@@ -125,6 +168,7 @@
             </ScrollView>
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
@@ -140,16 +184,8 @@
             android:layout_margin="@dimen/fab_margin"
             app:srcCompat="@android:drawable/ic_input_add"
             android:tint="@android:color/white"/>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_add_order_item_2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_menu_send"
-            android:tint="@android:color/white"
-            android:theme="@style/Button.Green"/>
     </LinearLayout>
 
 
-</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
