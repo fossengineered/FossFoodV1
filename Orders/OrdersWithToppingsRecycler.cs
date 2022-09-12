@@ -35,34 +35,35 @@ namespace FossFoodV1.Orders
             var h = holder as OrdersWithToppingsRecyclerViewHolder;
 
             var t = h.View.FindViewById<TextView>(Resource.Id.cardOrderWithToppings_ItemType);
-            t.Text = item.OrderItemType.ToString().Replace("_", " ");
+            t.Text = item.OrderItemType.Name;
 
             var l = h.View.FindViewById<ListView>(Resource.Id.order_item_toppings);
 
-            if (item.Toppings == null || item.Toppings.Count == 0)
-            {
-                l.Adapter = new ArrayAdapter(_activity, Resource.Layout.order_item_toppings, new List<string> { "no toppings" });
-                l.RequestLayout();
-            }
-            else
-            {
-                l.Adapter = new ArrayAdapter(
-                    _activity,
-                    Resource.Layout.order_item_toppings,
-                    item.Toppings.Select(a => a.ToString().Replace("_", " ")).ToArray());
-
-
-                l.LayoutParameters.Height = CalculateHeight(l);
-                l.RequestLayout();
-            }
-
-            var b = h.View.FindViewById<ImageView>(Resource.Id.delRowBtn);            
+            var b = h.View.FindViewById<ImageView>(Resource.Id.delRowBtn);
 
             b.Click -= B_Click;
             b.Click += B_Click;
 
             h.View.Click -= View_Click;
             h.View.Click += View_Click;
+
+            if (item.AvailableToppings.Count(a=>a.Selected) == 0)
+            {
+                l.Adapter = new ArrayAdapter(_activity, Resource.Layout.order_item_toppings, new List<string> { "no toppings" });
+                l.RequestLayout();
+
+                return;
+            }
+
+            l.Adapter = new ArrayAdapter(
+                    _activity,
+                    Resource.Layout.order_item_toppings,
+                    item.AvailableToppings.Where(a=>a.Selected).Select(a => a.Name).ToArray());
+
+
+            l.LayoutParameters.Height = CalculateHeight(l);
+            l.RequestLayout();
+
         }
 
         private int CalculateHeight(ListView list)

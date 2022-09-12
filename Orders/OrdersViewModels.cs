@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.Widget;
 using AndroidX.RecyclerView.Widget;
+using FossFoodV1.Food;
 using Google.Android.Material.FloatingActionButton;
 using System;
 using System.Collections.Generic;
@@ -42,13 +43,12 @@ namespace FossFoodV1.Orders
             var adapter = new SelectToppingsRecyclerAdapter(activity, (topping) => {
                 var item = _orderItemAdapter._items[_curreOrderItemPosition];
 
-                if (item.Toppings.Contains(topping))
-                    item.Toppings = item.Toppings.Except(new List<OrderToppingTypes> { topping }).ToList();
-                else
-                    item.Toppings.Add(topping);
+                var t = item.AvailableToppings.First(a => a.Name.Equals(topping.Name, StringComparison.OrdinalIgnoreCase));
+                t.Selected = !t.Selected;
 
                 _orderItemAdapter.UpdateItem(item, _curreOrderItemPosition);
             });
+
             toppingRecycler.SetAdapter(adapter);
             return adapter;
         }
@@ -59,14 +59,16 @@ namespace FossFoodV1.Orders
             orderButton.Click += (a, b) =>
             {
 
-                ShowSelectItemDialog((itemId) =>
+                ShowSelectItemDialog((foodItem) =>
                 {
+                    var foodEntity = new FoodEntity();
+                    //var item = Enum.GetNames(typeof(OrderItemTypes)).OrderBy(x => x).ToArray()[itemId];
+                    var orderItemType = foodEntity.MenuItems.Items.Single(a => a.Name.Equals(foodItem, StringComparison.OrdinalIgnoreCase));
 
-                    var item = Enum.GetNames(typeof(OrderItemTypes)).OrderBy(x => x).ToArray()[itemId];
 
-                    var order = new OrderWithToppings { 
-                        OrderItemType = (OrderItemTypes)Enum.Parse(typeof(OrderItemTypes), item),
-                        Toppings = new List<OrderToppingTypes>()
+                    var order = new OrderWithToppings {
+                        OrderItemType = orderItemType,
+                        AvailableToppings = foodEntity.GetAvailableToppings(orderItemType.Name)
                     };
 
                     adapter.AddItem(order);
@@ -74,7 +76,7 @@ namespace FossFoodV1.Orders
                     if(_toppingAdapter == null)
                         _toppingAdapter = InitToppingRecycler(activity);
 
-                    _toppingAdapter.OrderItemSelected(order.Toppings);
+                    _toppingAdapter.OrderItemSelected(order);
                     _curreOrderItemPosition = 0;
                 });
 
@@ -98,14 +100,14 @@ namespace FossFoodV1.Orders
         void HandleOrderItemSelected(OrderWithToppings selectedOrderItem, int position)
         {
 
-            _toppingAdapter.OrderItemSelected(selectedOrderItem.Toppings);
+            _toppingAdapter.OrderItemSelected(selectedOrderItem);
             _curreOrderItemPosition = position;
 
             //Toast toast = Toast.MakeText(_activity.ApplicationContext, $"toppings", ToastLength.Short);
             //toast.Show();
         }
 
-        public void ShowSelectItemDialog(Action<int> onItemSelected)
+        public void ShowSelectItemDialog(Action<string> onItemSelected)
         {
             var dialogView = _activity.LayoutInflater.Inflate(Resource.Layout.order_select_item, null);
             AlertDialog alertDialog;
@@ -118,13 +120,18 @@ namespace FossFoodV1.Orders
                 alertDialog = dialog.Create();
             }
 
-            var adapter = new ArrayAdapter(_activity, Android.Resource.Layout.SimpleListItem1, new OrdersEntity().GetOrderItemTypes());
+            var l = new FoodEntity().MenuItems;
+
+            var adapter = new ArrayAdapter(
+                _activity,
+                Android.Resource.Layout.SimpleListItem1,
+                new FoodEntity().MenuItems.Items.Select(a => a.Name).ToArray());
 
             var lv = dialogView.FindViewById<ListView>(Resource.Id.order_items_to_select);
             lv.Adapter = adapter;
 
-            lv.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => { 
-                onItemSelected(e.Position);
+            lv.ItemClick += (object sender, AdapterView.ItemClickEventArgs e) => {
+                onItemSelected(new FoodEntity().MenuItems.Items.ElementAt(e.Position).Name);
                 alertDialog.Hide();
             };
 

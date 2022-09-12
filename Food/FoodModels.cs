@@ -11,13 +11,25 @@ using System.Text;
 
 namespace FossFoodV1.Food
 {
-    public class Foods
+
+    public class MenuItems
     {
-        public Food[] Food { get; set; }
+        public FoodItem[] Items { get; set; }
+        public Topping[] Toppings { get; set; }
     }
 
-    public class Food
+    public class FoodItem
     {
         public string Name { get; set; }
+        public string[] Toppings { get; set; }
+        public float BasePrice { get; set; }
     }
+
+    public class Topping
+    {
+        public string Name { get; set; }
+        public float Charge { get; set; }
+        public bool Selected { get; set; }
+    }
+
 }

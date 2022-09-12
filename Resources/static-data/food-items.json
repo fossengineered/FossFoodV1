@@ -1,13 +1,49 @@
 ﻿{
-  "Food": [
+  "Items": [
     {
-      "Name": "Hamburger"
+      "Name": "Burger (The Thornton)",
+      "Toppings": [
+        "Bacon",
+        "Lettuce"
+      ],
+      "BasePrice": 12.00
     },
     {
-      "Name": "Hot Dog"
+      "Name": "Hot Dog",
+      "Toppings": [
+        "Mustard"
+      ],
+      "BasePrice": 10.00
     },
     {
-      "Name": "Funnel Cake"
+      "Name": "Funnel Cake (Original)",
+      "Toppings": [
+        "Powdered Sugar"
+      ],
+      "BasePrice": 5.00
+    }
+  ],
+  "Toppings": [
+    {
+      "Name": "Lettuce"
+    },
+    {
+      "Name": "Mustard"
+    },
+    {
+      "Name": "Bacon",
+      "Charge": 1.00
+    },
+    {
+      "Name": "Nacho Cheese",
+      "Charge": 1.00
+    },
+    {
+      "Name": "Sunny Side Up Egg",
+      "Charge": 0.50
+    },
+    {
+      "Name": "Powdered Sugar"
     }
   ]
 }

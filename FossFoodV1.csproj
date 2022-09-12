@@ -73,7 +73,7 @@
     <Compile Include="BtPrinting\IBlueToothService.cs" />
     <Compile Include="BtPrinting\PrintPageViewModel.cs" />
     <Compile Include="FoodActivity.cs" />
-    <Compile Include="Food\FoodEntities.cs" />
+    <Compile Include="Food\FoodEntity.cs" />
     <Compile Include="Food\FoodModels.cs" />
     <Compile Include="Food\FoodRenderer.cs" />
     <Compile Include="MainActivity.cs" />

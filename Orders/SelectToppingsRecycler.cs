@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AndroidX.RecyclerView.Widget;
+using FossFoodV1.Food;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,33 +15,29 @@ namespace FossFoodV1.Orders
 {
     internal class SelectToppingsRecyclerAdapter : RecyclerView.Adapter
     {
-        Action<OrderToppingTypes> _handleToppingSelected;
-        readonly Dictionary<string, OrderToppingTypes> _toppings;
-        List<OrderToppingTypes> _currentOrderToppings = new List<OrderToppingTypes>();
+        Action<Topping> _handleToppingSelected;
+        OrderWithToppings _currentOrder = new OrderWithToppings();
 
         Activity _activity;
 
-        public SelectToppingsRecyclerAdapter(Activity activity, Action<OrderToppingTypes> handleToppingSelected)
+        public SelectToppingsRecyclerAdapter(Activity activity, Action<Topping> handleToppingSelected)
         {
             _activity = activity;
             _handleToppingSelected = handleToppingSelected;
-
-            _toppings = Enum.GetNames(typeof(OrderToppingTypes))
-                .OrderBy(a => a).ToDictionary(a => a, b => (OrderToppingTypes)Enum.Parse(typeof(OrderToppingTypes), b));
         }
 
-        public override int ItemCount => _toppings.Count;
+        public override int ItemCount => _currentOrder.AvailableToppings.Count;
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            var item = _toppings.ElementAt(position);
+            var item = _currentOrder.AvailableToppings.ElementAt(position);
 
             var h = (SelectToppingsRecyclerViewHolder)holder;
 
             var cb = h.View.FindViewById<CheckBox>(Resource.Id.topping);
-            cb.Text = item.Key;
+            cb.Text = item.Name;
 
-            cb.Checked = _currentOrderToppings.Contains(item.Value);
+            cb.Checked = item.Selected;
 
             cb.Click -= Cb_Click;
             cb.Click += Cb_Click;
@@ -53,7 +50,7 @@ namespace FossFoodV1.Orders
 
             int position = p.GetChildAdapterPosition(r);
 
-            _handleToppingSelected(_toppings.ElementAt(position).Value);
+            _handleToppingSelected(_currentOrder.AvailableToppings.ElementAt(position));
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -63,9 +60,9 @@ namespace FossFoodV1.Orders
             return new SelectToppingsRecyclerViewHolder(linearLayout);
         }
 
-        internal void OrderItemSelected(List<OrderToppingTypes> selectedToppings)
+        internal void OrderItemSelected(OrderWithToppings order)
         {
-            _currentOrderToppings = selectedToppings;
+            _currentOrder =  order;
             NotifyDataSetChanged();
         }
     }
