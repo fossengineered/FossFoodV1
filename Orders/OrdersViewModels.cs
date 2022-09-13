@@ -18,11 +18,14 @@ namespace FossFoodV1.Orders
     internal class OrdersViewModels
     {
         Activity _activity;
-        List<OrderWithToppings>  _recyclerViewData = new List<OrderWithToppings>();
+        
         SelectToppingsRecyclerAdapter _toppingAdapter;
         OrdersWithToppingsRecyclerAdapter _orderItemAdapter;
         int _curreOrderItemPosition;
 
+        public static string _customerName;
+        public static int? _pagerNumber;
+        public static List<OrderWithToppings> _ordersWithToppings = new List<OrderWithToppings>();
 
         public OrdersViewModels(Activity activity)
         {
@@ -31,6 +34,73 @@ namespace FossFoodV1.Orders
             _orderItemAdapter = InitOrderRecycler(activity);
 
             InitOrderBtn(activity, _orderItemAdapter);
+            InitFormFields(activity);
+            InitCompleteOrder(activity);
+        }
+
+        public void ClearData()
+        {
+            _customerName = null;
+            _pagerNumber = null;
+        }
+
+        private void InitCompleteOrder(Activity activity)
+        {
+            activity.FindViewById<Button>(Resource.Id.btn_complete_order).Click += OrdersViewModels_Click_Complete_Order;
+        }
+
+        private void OrdersViewModels_Click_Complete_Order(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(_customerName))
+            {
+                Toast.MakeText(_activity.ApplicationContext, "Please enter a customer name", ToastLength.Short).Show();
+                return;
+
+                //toast.Show();
+            }
+
+            if (_pagerNumber == null)
+            {
+                Toast.MakeText(_activity.ApplicationContext, "Please enter a pager number", ToastLength.Short).Show();
+                return;
+
+                //toast.Show();
+            }
+
+            var intent = new Intent(_activity.ApplicationContext, typeof(CompleteOrderActivity));
+            _activity.StartActivity(intent);
+        }
+
+        private void InitFormFields(Activity activity)
+        {
+            activity.FindViewById<EditText>(Resource.Id.order_name).AfterTextChanged += OrdersViewModels_AfterTextChanged_Order_Name;
+
+            activity.FindViewById<EditText>(Resource.Id.pager_num).AfterTextChanged += OrdersViewModels_AfterTextChanged_Pager_Num;
+        }
+
+        private void OrdersViewModels_AfterTextChanged_Pager_Num(object sender, Android.Text.AfterTextChangedEventArgs e)
+        {
+            var t = _activity.FindViewById<EditText>(Resource.Id.pager_num).Text;
+
+            if (String.IsNullOrEmpty(t))
+                return;
+
+            int outNum;
+
+            if (!int.TryParse(t, out outNum))
+                return;
+
+            _pagerNumber = outNum;
+        }
+
+        private void OrdersViewModels_AfterTextChanged_Order_Name(object sender, Android.Text.AfterTextChangedEventArgs e)
+        {
+            var t = _activity.FindViewById<EditText>(Resource.Id.order_name).Text;
+
+            if (String.IsNullOrEmpty(t))
+                return;
+
+            _customerName = t;
         }
 
         private SelectToppingsRecyclerAdapter InitToppingRecycler(Activity activity)
@@ -41,7 +111,7 @@ namespace FossFoodV1.Orders
             toppingRecycler.HasFixedSize = true;
 
             var adapter = new SelectToppingsRecyclerAdapter(activity, (topping) => {
-                var item = _orderItemAdapter._items[_curreOrderItemPosition];
+                var item = _ordersWithToppings[_curreOrderItemPosition];
 
                 var t = item.AvailableToppings.First(a => a.Name.Equals(topping.Name, StringComparison.OrdinalIgnoreCase));
                 t.Selected = !t.Selected;
@@ -85,13 +155,14 @@ namespace FossFoodV1.Orders
 
         private OrdersWithToppingsRecyclerAdapter InitOrderRecycler(Activity activity)
         {
+            _ordersWithToppings = new List<OrderWithToppings>();
             var orderItemRecycler = activity.FindViewById<RecyclerView>(Resource.Id.order_items);
 
             var layoutManager = new LinearLayoutManager(activity) { Orientation = LinearLayoutManager.Vertical };
             orderItemRecycler.SetLayoutManager(layoutManager);
             orderItemRecycler.HasFixedSize = true;
 
-            var adapter = new OrdersWithToppingsRecyclerAdapter(_recyclerViewData, activity, HandleOrderItemSelected);
+            var adapter = new OrdersWithToppingsRecyclerAdapter(activity, HandleOrderItemSelected);
 
             orderItemRecycler.SetAdapter(adapter);
             return adapter;

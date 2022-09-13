@@ -8,6 +8,7 @@ using AndroidX.RecyclerView.Widget;
 using FossFoodV1.Food;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -41,6 +42,9 @@ namespace FossFoodV1.Orders
 
             cb.Click -= Cb_Click;
             cb.Click += Cb_Click;
+
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            h.View.FindViewById<TextView>(Resource.Id.upcharge).Text = item.Charge == 0 ? "" : $"{item.Charge.ToString("C", nfi)}";
         }
 
         private void Cb_Click(object sender, EventArgs e)

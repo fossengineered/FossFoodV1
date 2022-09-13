@@ -8,6 +8,7 @@ using AndroidX.CardView.Widget;
 using AndroidX.RecyclerView.Widget;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using static Android.Views.View;
@@ -16,23 +17,27 @@ namespace FossFoodV1.Orders
 {
     public class OrdersWithToppingsRecyclerAdapter : RecyclerView.Adapter
     {
-        public List<OrderWithToppings> _items;
+        //public List<OrderWithToppings> _items;
         Activity _activity;
         Action<OrderWithToppings, int> _onOrderItemSelected;
+        NumberFormatInfo _nfi = new CultureInfo("en-US", false).NumberFormat;
 
-        public OrdersWithToppingsRecyclerAdapter(List<OrderWithToppings> items, Activity activity, Action<OrderWithToppings,int> onOrderItemSelected)
+        public OrdersWithToppingsRecyclerAdapter(Activity activity, Action<OrderWithToppings,int> onOrderItemSelected)
         {
-            _items = items;
+            //_items = items;
             _activity = activity;
             _onOrderItemSelected = onOrderItemSelected;
         }
 
-        public override int ItemCount => _items.Count;
+        public override int ItemCount => OrdersViewModels._ordersWithToppings.Count; //_items.Count;
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            var item = _items[position];
+            var item = OrdersViewModels._ordersWithToppings[position];
             var h = holder as OrdersWithToppingsRecyclerViewHolder;
+
+            var amount = item.OrderItemType.BasePrice + item.AvailableToppings.Where(a => a.Selected).Sum(a => a.Charge);
+            h.View.FindViewById<TextView>(Resource.Id.item_price).Text = $"{amount.ToString("C", _nfi)}";
 
             var t = h.View.FindViewById<TextView>(Resource.Id.cardOrderWithToppings_ItemType);
             t.Text = item.OrderItemType.Name;
@@ -68,7 +73,6 @@ namespace FossFoodV1.Orders
 
         private int CalculateHeight(ListView list)
         {
-
             int height = 0;
 
             for (int i = 0; i < list.Count; i++)
@@ -86,14 +90,14 @@ namespace FossFoodV1.Orders
 
         internal void UpdateItem(OrderWithToppings item, int curreOrderItemPosition)
         {
-            _items[curreOrderItemPosition] = item;
+            OrdersViewModels._ordersWithToppings[curreOrderItemPosition] = item;
             NotifyDataSetChanged();
         }
 
         private void B_Click(object sender, EventArgs e)
         {
             var p = _activity.FindViewById<RecyclerView>(Resource.Id.order_items);
-            var r = (View)((View)((ImageView)sender).Parent).Parent;
+            var r = (View)((View)((View)((ImageView)sender).Parent).Parent).Parent;
 
             int position = p.GetChildAdapterPosition(r);
 
@@ -107,7 +111,7 @@ namespace FossFoodV1.Orders
         {
             int position = _activity.FindViewById<RecyclerView>(Resource.Id.order_items).GetChildAdapterPosition((View)sender);
 
-            _onOrderItemSelected(_items[position], position);
+            _onOrderItemSelected(OrdersViewModels._ordersWithToppings[position], position);
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -119,13 +123,13 @@ namespace FossFoodV1.Orders
 
         public void AddItem(OrderWithToppings item)
         {
-            _items = _items.Prepend(item).ToList();
+            OrdersViewModels._ordersWithToppings = OrdersViewModels._ordersWithToppings.Prepend(item).ToList();
             NotifyDataSetChanged();
         }
 
         public void RemoveItem(int position)
         {
-            _items.RemoveAt(position);
+            OrdersViewModels._ordersWithToppings.RemoveAt(position);
             NotifyDataSetChanged();
         }
     }

@@ -5,7 +5,7 @@
     android:minWidth="25px"
     android:minHeight="25px"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"    
+    android:layout_height="wrap_content"
     app:cardElevation="2dp"
     android:id="@+id/cardOrderWithToppings">
     <LinearLayout
@@ -18,7 +18,26 @@
         android:layout_marginBottom="20px"
         android:layout_width="@dimen/order_item_width"
         android:id="@+id/linearLayout1">
-        <ImageView
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2">
+            <TextView
+                android:text="Medium Text"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/item_price" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+        />
+            <ImageView
                 android:id="@+id/delRowBtn"
                 app:srcCompat="@android:drawable/ic_menu_delete"
                 android:tint="@android:color/holo_red_dark"
@@ -26,13 +45,16 @@
                 android:layout_height="30dp"
                 android:layout_gravity="right"
                 android:contentDescription=""/>
+
+        </LinearLayout>
+
         <TextView
-                android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="15px"
-                android:id="@+id/cardOrderWithToppings_ItemType" />
+            android:text="Large Text"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15px"
+            android:id="@+id/cardOrderWithToppings_ItemType" />
         <TextView
             android:text="@string/toppings"
             android:textAppearance="?android:attr/textAppearanceSmall"

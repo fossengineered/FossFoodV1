@@ -6,6 +6,7 @@ using Android.Views;
 using Android.Widget;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -22,6 +23,20 @@ namespace FossFoodV1.Orders
             SetContentView(Resource.Layout.order_complete_order);
 
             FindViewById<Button>(Resource.Id.btn_complete_order).Click += CompleteOrderActivity_Click;
+
+            SetOrderTotal();
+        }
+
+        private void SetOrderTotal()
+        {
+            var baseAmount = OrdersViewModels._ordersWithToppings.Sum(a => a.OrderItemType.BasePrice);
+            OrdersViewModels._ordersWithToppings.ForEach(a =>
+            {
+                baseAmount += a.AvailableToppings.Where(b => b.Selected).Select(c => c.Charge).Sum();
+            });
+
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            FindViewById<TextView>(Resource.Id.amount_due).Text = $"{baseAmount.ToString("C", nfi)}";
         }
 
         private void CompleteOrderActivity_Click(object sender, EventArgs e)

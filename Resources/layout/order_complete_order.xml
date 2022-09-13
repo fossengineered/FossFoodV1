@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textView2" />
             <TextView
-                android:text="$15.50"
+                android:text=""
                 android:layout_marginTop="30px"
                 android:layout_marginBottom="30px"
                 android:textAppearance="?android:attr/textAppearanceLarge"
