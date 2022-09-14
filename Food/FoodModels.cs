@@ -23,6 +23,7 @@ namespace FossFoodV1.Food
         public string Name { get; set; }
         public string[] Toppings { get; set; }
         public float BasePrice { get; set; }
+        public string[] AutoSelected { get; set; }
     }
 
     public class Topping

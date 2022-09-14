@@ -38,7 +38,11 @@ namespace FossFoodV1.Food
 
             foreach(var t in item.Toppings)
             {
-                available.Add(MenuItems.Toppings.First(a=>a.Name.Equals(t, StringComparison.OrdinalIgnoreCase)));
+                var a = MenuItems.Toppings.First(a => a.Name.Equals(t, StringComparison.OrdinalIgnoreCase));
+
+                a.Selected = item.AutoSelected != null && item.AutoSelected.Contains(t, StringComparer.OrdinalIgnoreCase);
+
+                available.Add(a);
             }
 
             return available;

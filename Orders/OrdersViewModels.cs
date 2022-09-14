@@ -67,6 +67,14 @@ namespace FossFoodV1.Orders
                 //toast.Show();
             }
 
+            if(_ordersWithToppings == null || _ordersWithToppings.Count == 0)
+            {
+                Toast.MakeText(_activity.ApplicationContext, "Please add at least 1 order item", ToastLength.Short).Show();
+                return;
+
+                //toast.Show();
+            }
+
             var intent = new Intent(_activity.ApplicationContext, typeof(CompleteOrderActivity));
             _activity.StartActivity(intent);
         }

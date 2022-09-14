@@ -16,6 +16,7 @@ namespace FossFoodV1.Orders
     {
         public FoodItem OrderItemType { get; set; }
         public List<Topping> AvailableToppings { get; set; }
+        
     }
 
     //public enum OrderItemTypes

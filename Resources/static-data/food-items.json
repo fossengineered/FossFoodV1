@@ -6,6 +6,23 @@
         "Bacon",
         "Lettuce"
       ],
+      "AutoSelected": [
+        "Lettuce"
+      ],
+      "BasePrice": 12.00
+    },
+    {
+      "Name": "Burger (The Jalapeno)",
+      "Toppings": [
+        "Bacon",
+        "Lettuce",
+        "Nacho Cheese",
+        "Jalapeno"
+      ],
+      "AutoSelected": [
+        "Jalapeno",
+        "Nacho Cheese"
+      ],
       "BasePrice": 12.00
     },
     {
@@ -18,6 +35,9 @@
     {
       "Name": "Funnel Cake (Original)",
       "Toppings": [
+        "Powdered Sugar"
+      ],
+      "AutoSelected": [
         "Powdered Sugar"
       ],
       "BasePrice": 5.00
@@ -36,7 +56,7 @@
     },
     {
       "Name": "Nacho Cheese",
-      "Charge": 1.00
+      "Charge": 0.50
     },
     {
       "Name": "Sunny Side Up Egg",
@@ -44,6 +64,9 @@
     },
     {
       "Name": "Powdered Sugar"
+    },
+    {
+      "Name": "Jalapeno"
     }
   ]
 }
