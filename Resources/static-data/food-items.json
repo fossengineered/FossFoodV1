@@ -3,34 +3,146 @@
     {
       "Name": "Burger (The Thornton)",
       "Toppings": [
-        "Bacon",
-        "Lettuce"
+        "Ketchup",
+        "Mustard",
+        "Mayo",
+        "Lettuce",
+        "Tomato",
+        "Onion",
+        "Chili",
+        "Nacho Cheese",
+        "Jalapeno",
+        "Bacon"
       ],
       "AutoSelected": [
-        "Lettuce"
+        "Ketchup",
+        "Mustard",
+        "Mayo",
+        "Lettuce",
+        "Tomato"
       ],
-      "BasePrice": 12.00
+      "BasePrice": 11.00
+    },
+    {
+      "Name": "Burger (The Single)",
+      "Toppings": [
+        "Ketchup",
+        "Mustard",
+        "Mayo",
+        "Lettuce",
+        "Tomato",
+        "Onion",
+        "Chili",
+        "Nacho Cheese",
+        "Jalapeno",
+        "Bacon"
+      ],
+      "AutoSelected": [
+        "Ketchup"
+      ],
+      "BasePrice": 9.00
+    },
+    {
+      "Name": "Burger (The Bacon Smash)",
+      "Toppings": [
+        "Ketchup",
+        "Mustard",
+        "Mayo",
+        "Lettuce",
+        "Tomato",
+        "Onion",
+        "Chili",
+        "Nacho Cheese",
+        "Jalapeno",
+        "Bacon"
+      ],
+      "AutoSelected": [
+        "Ketchup",
+        "Mayo",
+        "Bacon"
+      ],
+      "BasePrice": 10.00
     },
     {
       "Name": "Burger (The Jalapeno)",
       "Toppings": [
-        "Bacon",
+        "Ketchup",
+        "Mustard",
+        "Mayo",
         "Lettuce",
+        "Tomato",
+        "Onion",
+        "Chili",
         "Nacho Cheese",
-        "Jalapeno"
+        "Jalapeno",
+        "Bacon"
       ],
       "AutoSelected": [
         "Jalapeno",
         "Nacho Cheese"
       ],
-      "BasePrice": 12.00
+      "BasePrice": 11.00
     },
     {
       "Name": "Hot Dog",
       "Toppings": [
-        "Mustard"
+        "Ketchup",
+        "Mustard",
+        "Mayo",
+        "Onion",
+        "Nacho Cheese",
+        "Jalapeno",
+        "Chili"
       ],
-      "BasePrice": 10.00
+      "BasePrice": 9.00
+    },
+    {
+      "Name": "Hot Dog (Chili/Cheese)",
+      "Toppings": [
+        "Ketchup",
+        "Mustard",
+        "Mayo",
+        "Onion",
+        "Nacho Cheese",
+        "Chili"
+      ],
+      "AutoSelected": [
+        "Nacho Cheese",
+        "Jalapeno",
+        "Chili"
+      ],
+      "BasePrice": 9.00
+    },
+    {
+      "Name": "Fries",
+      "Toppings": [],
+      "BasePrice": 5.00
+    },
+    {
+      "Name": "Fries (Chilli/Cheese) ",
+      "Toppings": [
+        "Jalapeno",
+        "Chili",
+        "Nacho Cheese"
+      ],
+      "AutoSelected": [
+        "Chili",
+        "Nacho Cheese"
+      ],
+      "BasePrice": 5.00
+    },
+    {
+      "Name": "Fries(Nacho)",
+      "Toppings": [
+        "Jalapeno",
+        "Nacho Cheese"
+      ],
+      "AutoSelected": [
+        "Chili",
+        "Jalapeno",
+        "Nacho Cheese"
+      ],
+      "BasePrice": 5.00
     },
     {
       "Name": "Funnel Cake (Original)",
@@ -40,15 +152,113 @@
       "AutoSelected": [
         "Powdered Sugar"
       ],
-      "BasePrice": 5.00
+      "BasePrice": 7.00
+    },
+    {
+      "Name": "Funnel Cake (Strawberries & Cream)",
+      "Toppings": [
+        "Powdered Sugar",
+        "Whipped Cream",
+        "Strawberries"
+      ],
+      "AutoSelected": [
+        "Powdered Sugar",
+        "Whipped Cream",
+        "Strawberries"
+      ],
+      "BasePrice": 8.00
+    },
+    {
+      "Name": "Funnel Cake (Caramel Apple)",
+      "Toppings": [
+        "Powdered Sugar",
+        "Whipped Cream",
+        "Apples",
+        "Caramel"
+      ],
+      "AutoSelected": [
+        "Powdered Sugar",
+        "Whipped Cream",
+        "Apples",
+        "Caramel"
+      ],
+      "BasePrice": 8.00
+    },
+    {
+      "Name": "Funnel Cake (The Spooky One)",
+      "Toppings": [
+        "Powdered Sugar",
+        "Whipped Cream",
+        "Chocolate",
+        "Sprinkles"
+      ],
+      "AutoSelected": [
+        "Powdered Sugar",
+        "Whipped Cream",
+        "Chocolate",
+        "Sprinkles"
+      ],
+      "BasePrice": 8.00
+    },
+    {
+      "Name": "Funnel Cake (Fruity Pebbles)",
+      "Toppings": [
+        "Powdered Sugar",
+        "Whipped Cream",
+        "Fruity Pebbles",
+        "Fruity Pebbles Syrup"
+      ],
+      "AutoSelected": [
+        "Powdered Sugar",
+        "Whipped Cream",
+        "Fruity Pebbles",
+        "Fruity Pebbles Syrup"
+      ],
+      "BasePrice": 8.00
+    },
+    {
+      "Name": "Fried Oreos (6)",
+      "Toppings": [
+        "Powdered Sugar",
+        "Chocolate"
+      ],
+      "AutoSelected": [
+        "Powdered Sugar",
+        "Chocolate"
+      ],
+      "BasePrice": 8.00
+    },
+    {
+      "Name": "Soda",
+      "BasePrice": 1.00
+    },
+    {
+      "Name": "Water",
+      "BasePrice": 1.00
+    },
+    {
+      "Name": "Soda/Drink",
+      "BasePrice": 1.00
     }
   ],
   "Toppings": [
     {
-      "Name": "Lettuce"
+      "Name": "Ketchup"
     },
     {
       "Name": "Mustard"
+    },
+    {
+      "Name": "Mayo"
+    },
+    {
+      "Name": "Lettuce"
+    },
+    {
+      "Name": "Tomato"
+    },
+    {
+      "Name": "Onion"
     },
     {
       "Name": "Bacon",
@@ -56,17 +266,54 @@
     },
     {
       "Name": "Nacho Cheese",
-      "Charge": 0.50
+      "Charge": 1.00
+    },
+    {
+      "Name": "Jalapeno"
     },
     {
       "Name": "Sunny Side Up Egg",
-      "Charge": 0.50
+      "Charge": 1.00
+    },
+    {
+      "Name": "Nacho Cheese",
+      "Charge": 1.00
+    },
+    {
+      "Name": "Chili",
+      "Charge": 1.00
     },
     {
       "Name": "Powdered Sugar"
     },
     {
-      "Name": "Jalapeno"
+      "Name": "Strawberries",
+      "Charge": 1.00
+    },
+    {
+      "Name": "Apples",
+      "Charge": 1.00
+    },
+    {
+      "Name": "Caramel",
+      "Charge": 0.00
+    },
+    {
+      "Name": "Chocolate",
+      "Charge": 0.00
+    },
+    {
+      "Name": "Whipped Cream"
+    },
+    {
+      "Name": "Sprinkles"
+    },
+    {
+      "Name": "Fruity Pebbles"
+    },
+    {
+      "Name": "Fruity Pebbles Syrup"
     }
   ]
 }
+

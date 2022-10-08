@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using XFBluetoothPrint.Droid;
 
 namespace FossFoodV1.Orders
 {
@@ -23,8 +24,34 @@ namespace FossFoodV1.Orders
             SetContentView(Resource.Layout.order_complete_order);
 
             FindViewById<Button>(Resource.Id.btn_complete_order).Click += CompleteOrderActivity_Click;
+            FindViewById<Button>(Resource.Id.btn_print_order).Click += PrintOrder_Click; 
 
             SetOrderTotal();
+        }
+
+        private void PrintOrder_Click(object sender, EventArgs e)
+        {
+            var btPrint = new AndroidBlueToothService();
+
+            var device = btPrint.GetDeviceList();
+
+            if (device == null || device.Count == 0)
+            {
+                Toast.MakeText(ApplicationContext, "No printers found", ToastLength.Short).Show();
+                return;
+            }
+
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+
+            OrdersViewModels._ordersWithToppings.ForEach(order =>
+            {
+                btPrint.Print(device[0], $"{order.OrderItemType.Name} {order.OrderItemType.BasePrice}");
+                order.AvailableToppings.Where(t => t.Selected).ToList().ForEach(topping =>
+                {
+                    var charge = topping.Charge != 0 ? topping.Charge.ToString("C", nfi) : "";
+                    btPrint.Print(device[0], $"{topping.Name} {charge}");
+                });
+            });
         }
 
         private void SetOrderTotal()
@@ -41,6 +68,29 @@ namespace FossFoodV1.Orders
 
         private void CompleteOrderActivity_Click(object sender, EventArgs e)
         {
+            var btPrint = new AndroidBlueToothService();
+
+            var device = btPrint.GetDeviceList();
+
+            if(device == null || device.Count == 0)
+            {
+                Toast.MakeText(ApplicationContext, "No printers found", ToastLength.Short).Show();
+                return;
+            }
+
+            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+
+            OrdersViewModels._ordersWithToppings.ForEach(order =>
+            {
+                btPrint.Print(device[0], $"{order.OrderItemType.Name} {order.OrderItemType.BasePrice}");
+                order.AvailableToppings.Where(t => t.Selected).ToList().ForEach(topping =>
+                {
+                    var charge = topping.Charge != 0 ? topping.Charge.ToString("C", nfi) : "";
+                    btPrint.Print(device[0], $"{topping.Name} {charge}");
+                });
+            });
+
+
             var intent = new Intent(ApplicationContext, typeof(MainActivity));
             intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
             StartActivity(intent);
