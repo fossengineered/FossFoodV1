@@ -83,6 +83,7 @@
     <Compile Include="OrderManager\OrderManagerRepoSqlite.cs" />
     <Compile Include="OrderManager\OrderManagerViewModel.cs" />
     <Compile Include="Orders\CompleteOrderActivity.cs" />
+    <Compile Include="Orders\OrdersActivity.cs" />
     <Compile Include="Orders\OrdersEntity.cs" />
     <Compile Include="Orders\OrdersModels.cs" />
     <Compile Include="Orders\OrdersViewModels.cs" />

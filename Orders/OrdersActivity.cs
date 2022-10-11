@@ -13,11 +13,10 @@ using FossFoodV1.ServiceDates;
 using System;
 using XFBluetoothPrint.Droid;
 
-namespace FossFoodV1
+namespace FossFoodV1.Orders
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar")]
-    //[Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
-    public class MainActivity : AppCompatActivity
+    [Activity(Label = "OrdersActivity", Theme = "@style/AppTheme.NoActionBar")]
+    public class OrdersActivity : Activity
     {
         OrdersViewModels _ordersVM;
 
@@ -86,11 +85,11 @@ namespace FossFoodV1
             var c = (Android.Widget.RelativeLayout)sender;
 
             //var v = LayoutInflater.Inflate(Resource.Layout.food_items, c);
-            
+
             c.RemoveAllViews();
         }
 
-        
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -99,4 +98,3 @@ namespace FossFoodV1
         }
     }
 }
-

@@ -7,6 +7,7 @@ using Android.Widget;
 using AndroidX.RecyclerView.Widget;
 using FossFoodV1.Orders;
 using FossFoodV1.ServiceDates;
+using Google.Android.Material.FloatingActionButton;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,10 +32,20 @@ namespace FossFoodV1.OrderManager
 
             orderManager.Init();
 
-            orderManager.OpenOrders.Add(new Orders.OrderWithToppings());
+            _activity.FindViewById<FloatingActionButton>(Resource.Id.btn_add_order).Click += OrderManagerViewModel_AddOrder_Click; ;
+
+            //orderManager.OpenOrders.Add(new Orders.OrderWithToppings());
 
             InitOrderRecycler(_activity, orderManager.OpenOrders, Resource.Id.recycler_open_orders);
             InitOrderRecycler(_activity, orderManager.CloseOrders, Resource.Id.recycler_closed_orders);
+        }
+
+        private void OrderManagerViewModel_AddOrder_Click(object sender, EventArgs e)
+        {
+            //Toast.MakeText(_activity.ApplicationContext, "Click", ToastLength.Short).Show();
+            var intent = new Intent(_activity, typeof(OrdersActivity));
+            intent.SetFlags(ActivityFlags.ClearTop);
+            _activity.StartActivity(intent);
         }
 
         private OrderManagerOrderRecycler InitOrderRecycler(Activity activity, List<OrderWithToppings> orders, int recyclerId)

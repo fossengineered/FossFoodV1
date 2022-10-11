@@ -12,7 +12,7 @@ using System.Text;
 
 namespace FossFoodV1.OrderManager
 {
-    [Activity(Label = "OrderManagerActivity", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class OrderManagerActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)
