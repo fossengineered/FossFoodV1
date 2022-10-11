@@ -40,6 +40,8 @@ namespace FossFoodV1.OrderManager
             });
         }
 
+        internal OrderManagerOrders GetOrder(int orderId) => _repoSqlite.GetOrder(orderId);
+
         internal void CloseOrder(int orderId) => _repoSqlite.CloseOrder(orderId);
 
         internal void ReOpenOrder(int orderId) => _repoSqlite.ReOpenOrder(orderId);

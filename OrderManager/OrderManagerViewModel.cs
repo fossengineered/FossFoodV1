@@ -40,16 +40,44 @@ namespace FossFoodV1.OrderManager
                 orderManager.OpenOrders, 
                 Resource.Id.recycler_open_orders, 
                 RowStatus.Open,
-                a => { },
-                () => { _activity.Recreate(); });
+                OpenTicketSelected,
+                Refresh);
 
             InitOrderRecycler(
                 _activity, 
                 orderManager.CloseOrders, 
                 Resource.Id.recycler_closed_orders, 
                 RowStatus.Closed,
-                b => { },
-                () => { _activity.Recreate(); });
+                ClosedTicketSelected,
+                Refresh);
+        }
+
+        private void Refresh()
+        {
+            _activity.Finish();
+            _activity.OverridePendingTransition(0, 0);
+            _activity.StartActivity(_activity.Intent);
+            _activity.OverridePendingTransition(0, 0);
+        }
+
+        private void OpenTicketSelected(int orderId)
+        {
+            var intent = new Intent(_activity, typeof(OrdersActivity));
+
+            intent.SetFlags(ActivityFlags.ClearTop);
+            intent.PutExtra("order_id", orderId.ToString());
+
+            _activity.StartActivity(intent);
+        }
+
+        private void ClosedTicketSelected(int orderId)
+        {
+            var intent = new Intent(_activity, typeof(OrdersActivity));
+
+            intent.SetFlags(ActivityFlags.ClearTop);
+            intent.PutExtra("order_id", orderId.ToString());
+
+            _activity.StartActivity(intent);
         }
 
         private void OrderManagerViewModel_AddOrder_Click(object sender, EventArgs e)

@@ -7,6 +7,8 @@ using Android.Widget;
 using AndroidX.AppCompat.Widget;
 using AndroidX.RecyclerView.Widget;
 using FossFoodV1.Food;
+using FossFoodV1.OrderManager;
+using FossFoodV1.ServiceDates;
 using Google.Android.Material.FloatingActionButton;
 using System;
 using System.Collections.Generic;
@@ -36,6 +38,15 @@ namespace FossFoodV1.Orders
             InitOrderBtn(activity, _orderItemAdapter);
             InitFormFields(activity);
             InitCompleteOrder(activity);
+        }
+
+        internal void PopulateOrder(int orderId)
+        {
+            var order = new OrderManagerEntity(new ServiceDatesEntity().Current).GetOrder(orderId);
+
+            _activity.FindViewById<EditText>(Resource.Id.order_name).Text = order.CustomerName;
+
+            _activity.FindViewById<EditText>(Resource.Id.pager_num).Text = order.PagerNumber.ToString();
         }
 
         public void ClearData()

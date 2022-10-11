@@ -27,6 +27,12 @@ namespace FossFoodV1.Orders
 
             _ordersVM = new OrdersViewModels(this);
             _ordersVM.ClearData();
+
+            var orderId = Intent.GetStringExtra("order_id");
+
+            if (string.IsNullOrEmpty(orderId)) return;            
+
+            _ordersVM.PopulateOrder(int.Parse(orderId));
         }
 
         protected void SetupParent(View view)

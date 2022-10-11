@@ -55,6 +55,11 @@ namespace FossFoodV1.OrderManager
 
                 b.Click -= CloseTicket_Click;
                 b.Click += CloseTicket_Click;
+
+                var i = h.View.FindViewById<TextView>(Resource.Id.order_id);
+
+                i.Click -= ViewOpenOrder_Click;
+                i.Click += ViewOpenOrder_Click;
             }
             else if (_rowStatus == RowStatus.Closed)
             {
@@ -63,7 +68,32 @@ namespace FossFoodV1.OrderManager
 
                 b.Click -= ReOpenTicket_Click;
                 b.Click += ReOpenTicket_Click;
+
+                var i = h.View.FindViewById<TextView>(Resource.Id.order_id);
+
+                i.Click -= ViewClosedOrder_Click;
+                i.Click += ViewClosedOrder_Click;
             }
+        }
+
+        private void ViewClosedOrder_Click(object sender, EventArgs e)
+        {
+            var p = _activity.FindViewById<RecyclerView>(Resource.Id.recycler_closed_orders);
+            var r = ((View)sender).Parent.Parent.Parent;
+
+            int position = p.GetChildAdapterPosition((View)r);
+
+            _onOrderSelected(_orders[position].OrdersId);
+        }
+
+        private void ViewOpenOrder_Click(object sender, EventArgs e)
+        {
+            var p = _activity.FindViewById<RecyclerView>(Resource.Id.recycler_open_orders);
+            var r = ((View)sender).Parent.Parent.Parent;
+
+            int position = p.GetChildAdapterPosition((View)r);
+
+            _onOrderSelected(_orders[position].OrdersId);
         }
 
         private void CloseTicket_Click(object sender, EventArgs e)

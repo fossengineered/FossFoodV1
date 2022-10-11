@@ -25,14 +25,14 @@ namespace FossFoodV1.OrderManager
 
         internal List<OrderManagerOrders> GetOpenOrders(DateTime serviceDate)
         {
-            var m = _db.Table<OrderManagerOrders>().Where(x => x.RowStatus == RowStatus.Open);
+            var m = _db.Table<OrderManagerOrders>().Where(x => x.RowStatus == RowStatus.Open).OrderByDescending(a => a.OrdersId);
 
             return m.ToList();
         }
 
         internal List<OrderManagerOrders> GetOpenClosed(DateTime serviceDate)
         {
-            var m = _db.Table<OrderManagerOrders>().Where(x => x.RowStatus == RowStatus.Closed);
+            var m = _db.Table<OrderManagerOrders>().Where(x => x.RowStatus == RowStatus.Closed).OrderByDescending(a=>a.OrdersId);
 
             return m.ToList();
         }
@@ -52,6 +52,11 @@ namespace FossFoodV1.OrderManager
         internal void AddNewOrder(OrderManagerOrders order)
         {
             _db.Insert(order);
+        }
+
+        internal OrderManagerOrders GetOrder(int orderId)
+        {
+            return _db.Get<OrderManagerOrders>(orderId);
         }
 
         internal void CloseOrder(int orderId)
