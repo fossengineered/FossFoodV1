@@ -66,17 +66,22 @@
     <Reference Include="System.Numerics.Vectors" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BtPrintActivity.cs" />
+    <Compile Include="BtPrinting\BtPrintActivity.cs" />
     <Compile Include="BtPrinting\AndroidBlueToothService.cs" />
     <Compile Include="BtPrinting\BtPrintingEntity.cs" />
     <Compile Include="BtPrinting\Command.cs" />
     <Compile Include="BtPrinting\IBlueToothService.cs" />
     <Compile Include="BtPrinting\PrintPageViewModel.cs" />
-    <Compile Include="FoodActivity.cs" />
+    <Compile Include="Food\FoodActivity.cs" />
     <Compile Include="Food\FoodEntity.cs" />
     <Compile Include="Food\FoodModels.cs" />
     <Compile Include="Food\FoodRenderer.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="OrderManager\OrderManagerActivity.cs" />
+    <Compile Include="OrderManager\OrderManagerEntity.cs" />
+    <Compile Include="OrderManager\OrderManagerOrderRecycler.cs" />
+    <Compile Include="OrderManager\OrderManagerRepoSqlite.cs" />
+    <Compile Include="OrderManager\OrderManagerViewModel.cs" />
     <Compile Include="Orders\CompleteOrderActivity.cs" />
     <Compile Include="Orders\OrdersEntity.cs" />
     <Compile Include="Orders\OrdersModels.cs" />
@@ -85,6 +90,8 @@
     <Compile Include="Orders\SelectToppingsRecycler.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceDates\ServiceDatesEntity.cs" />
+    <Compile Include="ServiceDates\ServiceDatesModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -142,6 +149,9 @@
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>
+    <PackageReference Include="sqlite-net-pcl">
+      <Version>1.8.116</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.2.0.5" />
     <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0.1" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
@@ -198,6 +208,16 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\order_complete_order.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\order_manager_main.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\order_manager_item.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

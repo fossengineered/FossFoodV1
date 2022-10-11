@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:text="@string/service_date"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/white"
+                    android:paddingTop="10px"
+                    android:id="@+id/textView1" />
+                <TextView
+                    android:text="Large Text"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="220px"
+                    android:textColor="@android:color/white"
+                    android:id="@+id/current_service_date" />
+                <!--<ImageView
+                    app:srcCompat="@android:drawable/ic_menu_edit"
+                    android:layout_width="50px"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:foregroundGravity="right"
+                    android:layout_gravity="right"
+                    android:id="@+id/imageView1" />-->
+
+                <!-- <Button
+                    android:text="@string/change_service_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:foregroundGravity="right"
+                    android:layout_gravity="right"
+                    android:theme="@style/Button.Green"
+                android:backgroundTint="@android:color/holo_blue_light"
+                    android:id="@+id/btn_complete_order" />-->
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <LinearLayout
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/linearLayout1">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:id="@+id/linearLayout2"
+            android:gravity="center"
+            android:weightSum="100"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30px">
+            <TextView
+                android:text="@string/open_orders"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="50"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2" />
+            <TextView
+                android:text="@string/closed_orders"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_weight="50"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_height="match_parent"
+                android:id="@+id/textView3" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:weightSum="100"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="30px"
+            android:id="@+id/linearLayout1">
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_weight="50"
+                android:layout_height="match_parent"
+                android:id="@+id/scrollView1">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycler_open_orders" />
+            </ScrollView>
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_weight="50"
+                android:layout_height="match_parent"
+                android:id="@+id/scrollView2">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:minWidth="25px"
+                    android:minHeight="25px"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recycler_closed_orders" />
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:id="@+id/linearLayout4">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_add_order_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:tint="@android:color/white"/>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

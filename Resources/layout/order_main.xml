@@ -27,6 +27,7 @@
                     android:foregroundGravity="right"
                     android:layout_gravity="right"
                     android:theme="@style/Button.Green"
+                android:backgroundTint="@android:color/holo_green_light"
                     android:id="@+id/btn_complete_order" />
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -161,7 +162,7 @@
                     android:minWidth="25px"
                     android:minHeight="25px"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="15px"
                     android:id="@+id/selected_toppings" />
             </ScrollView>

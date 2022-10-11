@@ -16,4 +16,7 @@
 		<b>Selected Item Toppings</b>
 	</string>
 	<string name="complete_order">Complete Order</string>
+	<string name="service_date">Service Date</string>
+	<string name="open_orders">Open Orders</string>
+	<string name="closed_orders">Closed Orders</string>
 </resources>

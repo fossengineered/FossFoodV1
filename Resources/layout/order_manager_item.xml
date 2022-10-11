@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="2dp"
+    android:id="@+id/cardOrderWithToppings">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_border"
+        android:padding="15px"
+        android:layout_marginBottom="20px"
+        android:layout_width="@dimen/order_item_width"
+        android:id="@+id/linearLayout1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linearLayout2">
+            <TextView
+                android:text="OrderId"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/order_id" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+        />
+            <ImageView
+                android:id="@+id/delRowBtn"
+                app:srcCompat="@android:drawable/ic_menu_delete"
+                android:tint="@android:color/holo_red_dark"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_gravity="right"
+                android:contentDescription=""/>
+
+        </LinearLayout>
+        <TextView
+            android:text="Customer Name"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15px"
+            android:id="@+id/cardOrderWithToppings_ItemType" />
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

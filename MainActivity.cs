@@ -7,13 +7,16 @@ using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
 using AndroidX.AppCompat.App;
+using FossFoodV1.OrderManager;
 using FossFoodV1.Orders;
+using FossFoodV1.ServiceDates;
 using System;
 using XFBluetoothPrint.Droid;
 
 namespace FossFoodV1
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar")]
+    //[Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
     public class MainActivity : AppCompatActivity
     {
         OrdersViewModels _ordersVM;
@@ -26,6 +29,8 @@ namespace FossFoodV1
 
             _ordersVM = new OrdersViewModels(this);
             _ordersVM.ClearData();
+
+            new OrderManagerEntity(new ServiceDatesEntity().Current);
         }
 
         protected void SetupParent(View view)
