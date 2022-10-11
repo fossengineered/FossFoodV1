@@ -7,6 +7,7 @@ using Android.Widget;
 using AndroidX.CardView.Widget;
 using AndroidX.RecyclerView.Widget;
 using FossFoodV1.Orders;
+using FossFoodV1.ServiceDates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +15,26 @@ using System.Text;
 
 namespace FossFoodV1.OrderManager
 {
-    internal class OrderManagerOrderRecycler:RecyclerView.Adapter
+    internal class OrderManagerOrderRecycler : RecyclerView.Adapter
     {
         Activity _activity;
-        List<OrderWithToppings> _orders;
+        List<OrderManagerOrders> _orders;
+        RowStatus _rowStatus;
+        Action<int> _onOrderSelected;
+        Action _refreshParent;
 
-        public OrderManagerOrderRecycler(Activity activity, List<OrderWithToppings> orders)
+        public OrderManagerOrderRecycler(
+            Activity activity, 
+            List<OrderManagerOrders> orders, 
+            RowStatus rowStatus,
+            Action<int> onOrderSelected,
+            Action refreshParent)
         {
             _activity = activity;
             _orders = orders;
+            _rowStatus = rowStatus;
+            _onOrderSelected = onOrderSelected;
+            _refreshParent = refreshParent;
         }
 
         public override int ItemCount => _orders.Count;
@@ -31,6 +43,55 @@ namespace FossFoodV1.OrderManager
         {
             var item = _orders[position];
             var h = holder as OrderManagerOrderRecyclerViewHolder;
+
+            h.View.FindViewById<TextView>(Resource.Id.order_id).Text = $"Order Number  {item.OrdersId}";
+            h.View.FindViewById<TextView>(Resource.Id.customer_name).Text = item.CustomerName;
+            h.View.FindViewById<TextView>(Resource.Id.created_on).Text = item.CreatedOn.ToShortTimeString();
+
+            if (_rowStatus == RowStatus.Open)
+            {
+                var b = h.View.FindViewById<TextView>(Resource.Id.btn_order_manager_item);
+                b.Text = "Close Ticket";
+
+                b.Click -= CloseTicket_Click;
+                b.Click += CloseTicket_Click;
+            }
+            else if (_rowStatus == RowStatus.Closed)
+            {
+                var b = h.View.FindViewById<TextView>(Resource.Id.btn_order_manager_item);
+                b.Text = "Re-Open Ticket";
+
+                b.Click -= ReOpenTicket_Click;
+                b.Click += ReOpenTicket_Click;
+            }
+        }
+
+        private void CloseTicket_Click(object sender, EventArgs e)
+        {
+            var p = _activity.FindViewById<RecyclerView>(Resource.Id.recycler_open_orders);
+            var r = ((View)((Button)sender).Parent).Parent;
+
+            int position = p.GetChildAdapterPosition((View)r);
+
+            new OrderManagerEntity(new ServiceDatesEntity().Current).CloseOrder(_orders[position].OrdersId);
+
+            _refreshParent();
+
+            NotifyDataSetChanged();
+        }
+
+        private void ReOpenTicket_Click(object sender, EventArgs e)
+        {
+            var p = _activity.FindViewById<RecyclerView>(Resource.Id.recycler_open_orders);
+            var r = ((View)((Button)sender).Parent).Parent;
+
+            int position = p.GetChildAdapterPosition((View)r);
+
+            new OrderManagerEntity(new ServiceDatesEntity().Current).ReOpenOrder(_orders[position].OrdersId);
+
+            _refreshParent();
+
+            NotifyDataSetChanged();
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

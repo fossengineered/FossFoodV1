@@ -23,24 +23,53 @@ namespace FossFoodV1.OrderManager
             ValidateDb();
         }
 
+        internal List<OrderManagerOrders> GetOpenOrders(DateTime serviceDate)
+        {
+            var m = _db.Table<OrderManagerOrders>().Where(x => x.RowStatus == RowStatus.Open);
+
+            return m.ToList();
+        }
+
+        internal List<OrderManagerOrders> GetOpenClosed(DateTime serviceDate)
+        {
+            var m = _db.Table<OrderManagerOrders>().Where(x => x.RowStatus == RowStatus.Closed);
+
+            return m.ToList();
+        }
+
         void ValidateDb()
         {
             string dbPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "foss_food.db3");
 
-            File.Delete(dbPath);
+            //File.Delete(dbPath);
 
             _db = new SQLiteConnection(dbPath);
 
             _db.CreateTable<ServiceDate>();
             _db.CreateTable<OrderManagerOrders>();
-
         }
 
         internal void AddNewOrder(OrderManagerOrders order)
         {
             _db.Insert(order);
+        }
 
-            var t = _db.Table<OrderManagerOrders>().ToList();
+        internal void CloseOrder(int orderId)
+        {
+            var t = _db.Get<OrderManagerOrders>(orderId);
+
+            t.RowStatus = RowStatus.Closed;
+
+            _db.Update(t);
+        }
+
+        internal void ReOpenOrder(int orderId)
+        {
+            var t = _db.Get<OrderManagerOrders>(orderId);
+
+            t.RowStatus = RowStatus.Open;
+
+            _db.Update(t);
         }
     }
 }

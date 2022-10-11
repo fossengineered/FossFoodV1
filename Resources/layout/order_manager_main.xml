@@ -70,14 +70,12 @@
             android:minWidth="25px"
             android:minHeight="25px"
             android:id="@+id/linearLayout2"
-            android:gravity="center"
             android:weightSum="100"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30px">
             <TextView
                 android:text="@string/open_orders"
-                android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_weight="50"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -85,7 +83,6 @@
                 android:id="@+id/textView2" />
             <TextView
                 android:text="@string/closed_orders"
-                android:gravity="center"
                 android:layout_width="0dp"
                 android:layout_weight="50"
                 android:textAppearance="?android:attr/textAppearanceMedium"

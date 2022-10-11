@@ -80,6 +80,10 @@ namespace FossFoodV1.Orders
                 });
 
             PrintTicket();
+
+            var intent = new Intent(ApplicationContext, typeof(OrderManagerActivity));
+            intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
+            StartActivity(intent);
         }
 
         private void PrintTicket()
@@ -114,11 +118,7 @@ namespace FossFoodV1.Orders
 
             btPrint.Print(device[0], "");
             btPrint.Print(device[0], "");
-            btPrint.Print(device[0], "");
-
-            var intent = new Intent(ApplicationContext, typeof(OrderManagerActivity));
-            intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
-            StartActivity(intent);
+            btPrint.Print(device[0], "");            
         }
     }
 }

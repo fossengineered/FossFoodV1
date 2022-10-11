@@ -24,9 +24,10 @@ namespace FossFoodV1.OrderManager
         public int PagerNumber { get; set; }
         [NotNull]
         public string OrderData { get; set; }
+        [NotNull]        
+        public RowStatus RowStatus { get; set; }
         [NotNull]
-        
-        public string RowStatus { get; set; }
+        public DateTime CreatedOn { get; set; }
         
     }
 }

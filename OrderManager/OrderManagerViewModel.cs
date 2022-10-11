@@ -18,9 +18,12 @@ namespace FossFoodV1.OrderManager
     internal class OrderManagerViewModel
     {
         Activity _activity;
+        DateTime _serviceDate;
         public OrderManagerViewModel(DateTime serviceDate, Activity activity)
         {
             _activity = activity;
+            _serviceDate = serviceDate;
+
             activity.FindViewById<TextView>(Resource.Id.current_service_date).Text = serviceDate.ToShortDateString();
 
             Init();
@@ -28,14 +31,25 @@ namespace FossFoodV1.OrderManager
 
         internal void Init()
         {
-            var orderManager = new OrderManagerEntity(new ServiceDatesEntity().Current);
+            var orderManager = new OrderManagerEntity(_serviceDate);
 
             _activity.FindViewById<FloatingActionButton>(Resource.Id.btn_add_order).Click += OrderManagerViewModel_AddOrder_Click; ;
 
-            //orderManager.OpenOrders.Add(new Orders.OrderWithToppings());
+            InitOrderRecycler(
+                _activity, 
+                orderManager.OpenOrders, 
+                Resource.Id.recycler_open_orders, 
+                RowStatus.Open,
+                a => { },
+                () => { _activity.Recreate(); });
 
-            InitOrderRecycler(_activity, orderManager.OpenOrders, Resource.Id.recycler_open_orders);
-            InitOrderRecycler(_activity, orderManager.CloseOrders, Resource.Id.recycler_closed_orders);
+            InitOrderRecycler(
+                _activity, 
+                orderManager.CloseOrders, 
+                Resource.Id.recycler_closed_orders, 
+                RowStatus.Closed,
+                b => { },
+                () => { _activity.Recreate(); });
         }
 
         private void OrderManagerViewModel_AddOrder_Click(object sender, EventArgs e)
@@ -46,7 +60,13 @@ namespace FossFoodV1.OrderManager
             _activity.StartActivity(intent);
         }
 
-        private OrderManagerOrderRecycler InitOrderRecycler(Activity activity, List<OrderWithToppings> orders, int recyclerId)
+        private OrderManagerOrderRecycler InitOrderRecycler(
+            Activity activity, 
+            List<OrderManagerOrders> orders, 
+            int recyclerId, 
+            RowStatus rowStatus,
+            Action<int> onItemSelected,
+            Action refreshParent)
         {
             var orderItemRecycler = activity.FindViewById<RecyclerView>(recyclerId);
 
@@ -54,7 +74,7 @@ namespace FossFoodV1.OrderManager
             orderItemRecycler.SetLayoutManager(layoutManager);
             orderItemRecycler.HasFixedSize = true;
 
-            var adapter = new OrderManagerOrderRecycler(activity, orders);
+            var adapter = new OrderManagerOrderRecycler(activity, orders, rowStatus, onItemSelected, refreshParent);
 
             orderItemRecycler.SetAdapter(adapter);
             return adapter;

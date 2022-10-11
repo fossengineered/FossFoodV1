@@ -18,8 +18,8 @@ namespace FossFoodV1.OrderManager
         DateTime _serviceDate;
         OrderManagerRepoSqlite _repoSqlite;
 
-        public List<OrderWithToppings> OpenOrders { get { return new List<OrderWithToppings>(); } }
-        public List<OrderWithToppings> CloseOrders { get { return new List<OrderWithToppings>(); } }
+        public List<OrderManagerOrders> OpenOrders { get => _repoSqlite.GetOpenOrders(_serviceDate); }
+        public List<OrderManagerOrders> CloseOrders { get => _repoSqlite.GetOpenClosed(_serviceDate); }
 
         public OrderManagerEntity(DateTime serviceDate)
         {
@@ -33,10 +33,15 @@ namespace FossFoodV1.OrderManager
             {
                 CustomerName = customerDetails.CustomerName,
                 ServiceDateId = int.Parse(_serviceDate.ToString("yyyyMMdd")),
-                RowStatus = RowStatus.Open.ToString(),
+                RowStatus = RowStatus.Open,
                 PagerNumber = customerDetails.PagerNumber,
-                OrderData = JsonConvert.SerializeObject(orderWithToppings)
-            }); ;
+                OrderData = JsonConvert.SerializeObject(orderWithToppings),
+                CreatedOn = DateTime.Now
+            });
         }
+
+        internal void CloseOrder(int orderId) => _repoSqlite.CloseOrder(orderId);
+
+        internal void ReOpenOrder(int orderId) => _repoSqlite.ReOpenOrder(orderId);
     }
 }

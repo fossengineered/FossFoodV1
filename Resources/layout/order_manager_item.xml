@@ -6,8 +6,8 @@
     android:minHeight="25px"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     app:cardElevation="2dp"
-    
     android:id="@+id/cardOrderWithToppings">
     <LinearLayout
         android:orientation="vertical"
@@ -25,6 +25,7 @@
             android:minHeight="25px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5px"
             android:id="@+id/linearLayout2">
             <TextView
                 android:text="OrderId"
@@ -38,7 +39,6 @@
                 android:layout_weight="1"
         />
             <ImageView
-                
                 app:srcCompat="@android:drawable/ic_menu_delete"
                 android:tint="@android:color/holo_red_dark"
                 android:layout_width="40dp"
@@ -48,19 +48,26 @@
 
         </LinearLayout>
         <TextView
+            android:text="CreatedOn"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15px"
+            android:id="@+id/created_on" />
+        <TextView
             android:text="Customer Name"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="15px"
-            android:id="@+id/cardOrderWithToppings_ItemType" />
+            android:id="@+id/customer_name" />
         <Button
             android:text="Close Ticket"
             android:backgroundTint="@color/colorAccent"
             android:textColor="@android:color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/button1" />
+            android:id="@+id/btn_order_manager_item" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

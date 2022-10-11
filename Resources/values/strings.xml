@@ -23,4 +23,7 @@
 	<string name="closed_orders">
 		<b>Closed Orders</b>
 	</string>
+	<string name="no_items">
+		<b>No Items</b>
+	</string>
 </resources>
