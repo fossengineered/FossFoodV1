@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="2dp"
+    
     android:id="@+id/cardOrderWithToppings">
     <LinearLayout
         android:orientation="vertical"
@@ -15,7 +16,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/layout_border"
         android:padding="15px"
-        android:layout_marginBottom="20px"
         android:layout_width="@dimen/order_item_width"
         android:id="@+id/linearLayout1">
 
@@ -38,7 +38,7 @@
                 android:layout_weight="1"
         />
             <ImageView
-                android:id="@+id/delRowBtn"
+                
                 app:srcCompat="@android:drawable/ic_menu_delete"
                 android:tint="@android:color/holo_red_dark"
                 android:layout_width="40dp"
@@ -54,6 +54,13 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="15px"
             android:id="@+id/cardOrderWithToppings_ItemType" />
+        <Button
+            android:text="Close Ticket"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button1" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

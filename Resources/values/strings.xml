@@ -17,6 +17,10 @@
 	</string>
 	<string name="complete_order">Complete Order</string>
 	<string name="service_date">Service Date</string>
-	<string name="open_orders">Open Orders</string>
-	<string name="closed_orders">Closed Orders</string>
+	<string name="open_orders">
+		<b>Open Orders</b>
+	</string>
+	<string name="closed_orders">
+		<b>Closed Orders</b>
+	</string>
 </resources>
