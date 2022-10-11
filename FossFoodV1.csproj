@@ -72,13 +72,14 @@
     <Compile Include="BtPrinting\Command.cs" />
     <Compile Include="BtPrinting\IBlueToothService.cs" />
     <Compile Include="BtPrinting\PrintPageViewModel.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Food\FoodActivity.cs" />
     <Compile Include="Food\FoodEntity.cs" />
     <Compile Include="Food\FoodModels.cs" />
     <Compile Include="Food\FoodRenderer.cs" />
-    <Compile Include="MainActivity.cs" />
     <Compile Include="OrderManager\OrderManagerActivity.cs" />
     <Compile Include="OrderManager\OrderManagerEntity.cs" />
+    <Compile Include="OrderManager\OrderManagerModels.cs" />
     <Compile Include="OrderManager\OrderManagerOrderRecycler.cs" />
     <Compile Include="OrderManager\OrderManagerRepoSqlite.cs" />
     <Compile Include="OrderManager\OrderManagerViewModel.cs" />

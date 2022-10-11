@@ -8,6 +8,7 @@ using FossFoodV1.ServiceDates;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -15,25 +16,31 @@ namespace FossFoodV1.OrderManager
 {
     internal class OrderManagerRepoSqlite
     {
-        public void ValidateDb(DateTime serviceDate)
+        SQLiteConnection _db;
+
+        public OrderManagerRepoSqlite(DateTime serviceDate)
+        {
+            ValidateDb();
+        }
+
+        void ValidateDb()
         {
             string dbPath = System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "foss_food.db3");
 
-            var db = new SQLiteConnection(dbPath);
+            File.Delete(dbPath);
 
-            db.CreateTable<ServiceDate>();
+            _db = new SQLiteConnection(dbPath);
 
-            var table = db.Table<ServiceDate>();
+            _db.CreateTable<ServiceDate>();
+            _db.CreateTable<OrderManagerOrders>();
 
-            if (!table.Any())
-            {
-                db.Insert(new ServiceDate
-                {
-                    S_Date =serviceDate 
-                });
-            }
+        }
 
-            var sDate = table.Last();
+        internal void AddNewOrder(OrderManagerOrders order)
+        {
+            _db.Insert(order);
+
+            var t = _db.Table<OrderManagerOrders>().ToList();
         }
     }
 }

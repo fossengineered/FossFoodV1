@@ -4,6 +4,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using FossFoodV1.OrderManager;
+using FossFoodV1.ServiceDates;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -68,6 +70,20 @@ namespace FossFoodV1.Orders
 
         private void CompleteOrderActivity_Click(object sender, EventArgs e)
         {
+            new OrderManagerEntity(new ServiceDatesEntity().Current)
+                .AddNewOrder(
+                OrdersViewModels._ordersWithToppings,
+                new OrderCustomerDetails
+                {
+                    CustomerName = OrdersViewModels._customerName,
+                    PagerNumber = OrdersViewModels._pagerNumber.Value
+                });
+
+            PrintTicket();
+        }
+
+        private void PrintTicket()
+        {
             var btPrint = new AndroidBlueToothService();
 
             var device = btPrint.GetDeviceList();
@@ -100,7 +116,7 @@ namespace FossFoodV1.Orders
             btPrint.Print(device[0], "");
             btPrint.Print(device[0], "");
 
-            var intent = new Intent(ApplicationContext, typeof(MainActivity));
+            var intent = new Intent(ApplicationContext, typeof(OrderManagerActivity));
             intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
             StartActivity(intent);
         }

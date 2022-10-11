@@ -30,8 +30,6 @@ namespace FossFoodV1.OrderManager
         {
             var orderManager = new OrderManagerEntity(new ServiceDatesEntity().Current);
 
-            orderManager.Init();
-
             _activity.FindViewById<FloatingActionButton>(Resource.Id.btn_add_order).Click += OrderManagerViewModel_AddOrder_Click; ;
 
             //orderManager.OpenOrders.Add(new Orders.OrderWithToppings());

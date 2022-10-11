@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using FossFoodV1.Orders;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,21 +15,28 @@ namespace FossFoodV1.OrderManager
 {
     internal class OrderManagerEntity
     {
-        static List<OrderWithToppings> _openOrders;
-        static List<OrderWithToppings> _closedOrders;
+        DateTime _serviceDate;
+        OrderManagerRepoSqlite _repoSqlite;
 
-        public List<OrderWithToppings> OpenOrders { get { return _openOrders; } }
-        public List<OrderWithToppings> CloseOrders { get { return _closedOrders; } }
+        public List<OrderWithToppings> OpenOrders { get { return new List<OrderWithToppings>(); } }
+        public List<OrderWithToppings> CloseOrders { get { return new List<OrderWithToppings>(); } }
 
         public OrderManagerEntity(DateTime serviceDate)
         {
-            new OrderManagerRepoSqlite().ValidateDb(serviceDate);
+            _serviceDate = serviceDate;
+            _repoSqlite = new OrderManagerRepoSqlite(serviceDate);
         }
 
-        internal void Init()
+        internal void AddNewOrder(List<OrderWithToppings> orderWithToppings, OrderCustomerDetails customerDetails)
         {
-            _openOrders = new List<OrderWithToppings>();
-            _closedOrders = new List<OrderWithToppings>();
+            _repoSqlite.AddNewOrder(new OrderManagerOrders
+            {
+                CustomerName = customerDetails.CustomerName,
+                ServiceDateId = int.Parse(_serviceDate.ToString("yyyyMMdd")),
+                RowStatus = RowStatus.Open.ToString(),
+                PagerNumber = customerDetails.PagerNumber,
+                OrderData = JsonConvert.SerializeObject(orderWithToppings)
+            }); ;
         }
     }
 }

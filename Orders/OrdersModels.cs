@@ -19,6 +19,12 @@ namespace FossFoodV1.Orders
         
     }
 
+    public class OrderCustomerDetails
+    {
+        public string CustomerName { get; set; }
+        public int PagerNumber { get; set; }
+    }
+
     //public enum OrderItemTypes
     //{
     //   Burger_Thornton,
