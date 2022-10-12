@@ -74,15 +74,15 @@ namespace FossFoodV1.Orders
 
         private void CompleteOrderActivity_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(_orderId))
-            new OrderManagerEntity(new ServiceDatesEntity().Current)
-                .AddNewOrder(
-                OrdersViewModels._ordersWithToppings,
-                new OrderCustomerDetails
-                {
-                    CustomerName = OrdersViewModels._customerName,
-                    PagerNumber = OrdersViewModels._pagerNumber.Value
-                });
+            if (string.IsNullOrEmpty(_orderId))
+                new OrderManagerEntity(new ServiceDatesEntity().Current)
+                    .AddNewOrder(
+                    OrdersViewModels._ordersWithToppings,
+                    new OrderCustomerDetails
+                    {
+                        CustomerName = OrdersViewModels._customerName,
+                        PagerNumber = OrdersViewModels._pagerNumber.Value
+                    });
             else
             {
                 new OrderManagerEntity(new ServiceDatesEntity().Current)
@@ -105,37 +105,44 @@ namespace FossFoodV1.Orders
 
         private void PrintTicket()
         {
-            var btPrint = new AndroidBlueToothService();
-
-            var device = btPrint.GetDeviceList();
-
-            if (device == null || device.Count == 0)
+            try
             {
-                Toast.MakeText(ApplicationContext, "No printers found", ToastLength.Short).Show();
-                return;
-            }
+                var btPrint = new AndroidBlueToothService();
 
-            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+                var device = btPrint.GetDeviceList();
 
-            btPrint.Print(device[0], $"{DateTime.Now.ToShortTimeString()}");
-            btPrint.Print(device[0], "");
+                if (device == null || device.Count == 0)
+                {
+                    Toast.MakeText(ApplicationContext, "No printers found", ToastLength.Short).Show();
+                    return;
+                }
 
-            OrdersViewModels._ordersWithToppings.ForEach(order =>
-            {
+                NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+
+                btPrint.Print(device[0], $"{DateTime.Now.ToShortTimeString()}");
                 btPrint.Print(device[0], "");
 
-                btPrint.Print(device[0], $"{order.OrderItemType.Name} -{order.OrderItemType.BasePrice}-");
-
-                order.AvailableToppings.Where(t => t.Selected).ToList().ForEach(topping =>
+                OrdersViewModels._ordersWithToppings.ForEach(order =>
                 {
-                    var charge = topping.Charge != 0 ? topping.Charge.ToString("C", nfi) : "";
-                    btPrint.Print(device[0], $"   {topping.Name} -{charge}-");
-                });
-            });
+                    btPrint.Print(device[0], "");
 
-            btPrint.Print(device[0], "");
-            btPrint.Print(device[0], "");
-            btPrint.Print(device[0], "");            
+                    btPrint.Print(device[0], $"{order.OrderItemType.Name} -{order.OrderItemType.BasePrice}-");
+
+                    order.AvailableToppings.Where(t => t.Selected).ToList().ForEach(topping =>
+                    {
+                        var charge = topping.Charge != 0 ? topping.Charge.ToString("C", nfi) : "";
+                        btPrint.Print(device[0], $"   {topping.Name} -{charge}-");
+                    });
+                });
+
+                btPrint.Print(device[0], "");
+                btPrint.Print(device[0], "");
+                btPrint.Print(device[0], "");
+            }
+            catch (Exception ex)
+            {
+                Toast.MakeText(ApplicationContext, ex.Message, ToastLength.Long).Show();
+            }
         }
     }
 }
