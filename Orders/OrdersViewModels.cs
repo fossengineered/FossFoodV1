@@ -29,7 +29,7 @@ namespace FossFoodV1.Orders
         public static string _customerName;
         public static int? _pagerNumber;
         public static List<OrderWithToppings> _ordersWithToppings = new List<OrderWithToppings>();
-        private int _orderId;
+        private string _orderId;
 
         public OrdersViewModels(Activity activity)
         {
@@ -42,11 +42,11 @@ namespace FossFoodV1.Orders
             InitCompleteOrder(activity);
         }
 
-        internal void PopulateOrder(int orderId)
+        internal void PopulateOrder(string orderId)
         {
             _orderId = orderId;
 
-            var order = new OrderManagerEntity(new ServiceDatesEntity().Current).GetOrder(orderId);
+            var order = new OrderManagerEntity(new ServiceDatesEntity().Current).GetOrder(int.Parse(orderId));
 
             _rowStatus = order.RowStatus;
 
@@ -98,7 +98,7 @@ namespace FossFoodV1.Orders
             }
 
             var intent = new Intent(_activity.ApplicationContext, typeof(CompleteOrderActivity));
-            intent.PutExtra("order_id", _orderId.ToString());
+            intent.PutExtra("order_id", _orderId);
             _activity.StartActivity(intent);
         }
 

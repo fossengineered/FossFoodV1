@@ -21,7 +21,7 @@ namespace XFBluetoothPrint.Droid
         {
 
             var btdevice = bluetoothAdapter?.BondedDevices
-            .Select(i => i.Name).ToList();
+            .Select(i => i.Address).ToList();
             return btdevice;
 
         }
@@ -30,7 +30,7 @@ namespace XFBluetoothPrint.Droid
         {
 
             BluetoothDevice device = (from bd in bluetoothAdapter?.BondedDevices
-                                      where bd?.Name == deviceName
+                                      where bd?.Address == deviceName
                                       select bd).FirstOrDefault();
             try
             {

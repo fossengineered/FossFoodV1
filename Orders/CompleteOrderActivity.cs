@@ -98,7 +98,7 @@ namespace FossFoodV1.Orders
 
             PrintTicket();
 
-            var intent = new Intent(ApplicationContext, typeof(OrderManagerActivity));
+            var intent = new Intent(ApplicationContext, typeof(OrderChecklistActivity));
             intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
             StartActivity(intent);
         }
@@ -109,35 +109,38 @@ namespace FossFoodV1.Orders
             {
                 var btPrint = new AndroidBlueToothService();
 
-                var device = btPrint.GetDeviceList();
+                var devices = btPrint.GetDeviceList();
 
-                if (device == null || device.Count == 0)
+                if (devices == null || devices.Count == 0)
                 {
                     Toast.MakeText(ApplicationContext, "No printers found", ToastLength.Short).Show();
                     return;
                 }
 
-                NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
-
-                btPrint.Print(device[0], $"{DateTime.Now.ToShortTimeString()}");
-                btPrint.Print(device[0], "");
-
-                OrdersViewModels._ordersWithToppings.ForEach(order =>
+                foreach(var device in devices)
                 {
-                    btPrint.Print(device[0], "");
+                    NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
 
-                    btPrint.Print(device[0], $"{order.OrderItemType.Name} -{order.OrderItemType.BasePrice}-");
+                    btPrint.Print(device, $"{DateTime.Now.ToShortTimeString()}");
+                    btPrint.Print(device, "");
 
-                    order.AvailableToppings.Where(t => t.Selected).ToList().ForEach(topping =>
+                    OrdersViewModels._ordersWithToppings.ForEach(order =>
                     {
-                        var charge = topping.Charge != 0 ? topping.Charge.ToString("C", nfi) : "";
-                        btPrint.Print(device[0], $"   {topping.Name} -{charge}-");
-                    });
-                });
+                        btPrint.Print(device, "");
 
-                btPrint.Print(device[0], "");
-                btPrint.Print(device[0], "");
-                btPrint.Print(device[0], "");
+                        btPrint.Print(device, $"{order.OrderItemType.Name} -{order.OrderItemType.BasePrice}-");
+
+                        order.AvailableToppings.Where(t => t.Selected).ToList().ForEach(topping =>
+                        {
+                            var charge = topping.Charge != 0 ? topping.Charge.ToString("C", nfi) : "";
+                            btPrint.Print(device, $"   {topping.Name} -{charge}-");
+                        });
+                    });
+
+                    btPrint.Print(device, "");
+                    btPrint.Print(device, "");
+                    btPrint.Print(device, "");
+                }                
             }
             catch (Exception ex)
             {

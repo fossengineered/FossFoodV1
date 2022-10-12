@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/AppTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:popupTheme="@style/AppTheme.PopupOverlay">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">            
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <RelativeLayout
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/relativeLayout1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            android:padding="30px"
+            android:gravity="center_horizontal"
+            android:id="@+id/linearLayout1">
+            <TextView
+                android:text="@string/complete_order_checklist"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView2" />
+            <TextView
+                android:text=""
+                android:layout_marginTop="30px"
+                android:layout_marginBottom="30px"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="32dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/amount_due" />
+            <!--<Button
+                android:text="Print"
+               android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_print_order"/>-->
+            <Button
+                android:text="@string/done"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:theme="@style/Button.Green"
+                android:backgroundTint="@android:color/holo_green_light"
+                android:id="@+id/order_confirm_checklist" />
+        </LinearLayout>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

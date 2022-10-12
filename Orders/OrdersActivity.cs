@@ -32,7 +32,9 @@ namespace FossFoodV1.Orders
 
             if (string.IsNullOrEmpty(orderId)) return;            
 
-            _ordersVM.PopulateOrder(int.Parse(orderId));
+            _ordersVM.PopulateOrder(orderId);
+
+           
         }
 
         protected void SetupParent(View view)

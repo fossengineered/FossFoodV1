@@ -84,6 +84,7 @@
     <Compile Include="OrderManager\OrderManagerRepoSqlite.cs" />
     <Compile Include="OrderManager\OrderManagerViewModel.cs" />
     <Compile Include="Orders\CompleteOrderActivity.cs" />
+    <Compile Include="Orders\OrderChecklistActivity.cs" />
     <Compile Include="Orders\OrdersActivity.cs" />
     <Compile Include="Orders\OrdersEntity.cs" />
     <Compile Include="Orders\OrdersModels.cs" />
@@ -230,6 +231,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\baseline_visibility_20.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\order_completed_checklist.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

@@ -85,6 +85,7 @@ namespace FossFoodV1.OrderManager
             //Toast.MakeText(_activity.ApplicationContext, "Click", ToastLength.Short).Show();
             var intent = new Intent(_activity, typeof(OrdersActivity));
             intent.SetFlags(ActivityFlags.ClearTop);
+            intent.PutExtra("order_id", "");
             _activity.StartActivity(intent);
         }
 
