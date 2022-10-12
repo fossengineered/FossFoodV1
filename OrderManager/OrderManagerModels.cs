@@ -4,6 +4,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using FossFoodV1.Orders;
+using Newtonsoft.Json;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -24,10 +26,11 @@ namespace FossFoodV1.OrderManager
         public int PagerNumber { get; set; }
         [NotNull]
         public string OrderData { get; set; }
-        [NotNull]        
+        [NotNull]
         public RowStatus RowStatus { get; set; }
         [NotNull]
         public DateTime CreatedOn { get; set; }
-        
+        [Ignore]
+        public List<OrderWithToppings> OrderWithToppings { get => JsonConvert.DeserializeObject<List<OrderWithToppings>>(OrderData); }
     }
 }

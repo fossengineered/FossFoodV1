@@ -4,7 +4,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using FossFoodV1.Orders;
 using FossFoodV1.ServiceDates;
+using Newtonsoft.Json;
 using SQLite;
 using System;
 using System.Collections.Generic;
@@ -64,6 +66,17 @@ namespace FossFoodV1.OrderManager
             var t = _db.Get<OrderManagerOrders>(orderId);
 
             t.RowStatus = RowStatus.Closed;
+
+            _db.Update(t);
+        }
+
+        internal void UpdateOrder(int orderId, List<OrderWithToppings> ordersWithToppings, OrderCustomerDetails orderCustomerDetails)
+        {
+            var t = _db.Get<OrderManagerOrders>(orderId);
+
+            t.CustomerName = orderCustomerDetails.CustomerName;
+            t.PagerNumber = orderCustomerDetails.PagerNumber;
+            t.OrderData = JsonConvert.SerializeObject(ordersWithToppings);
 
             _db.Update(t);
         }

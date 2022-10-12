@@ -18,12 +18,16 @@ namespace FossFoodV1.Orders
     [Activity(Label = "CompleteOrderActivity", Theme = "@style/AppTheme.NoActionBar")]
     public class CompleteOrderActivity : Activity
     {
+        string _orderId;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
             SetContentView(Resource.Layout.order_complete_order);
+
+            _orderId = Intent.GetStringExtra("order_id");
 
             FindViewById<Button>(Resource.Id.btn_complete_order).Click += CompleteOrderActivity_Click;
             //FindViewById<Button>(Resource.Id.btn_print_order).Click += PrintOrder_Click; 
@@ -70,6 +74,7 @@ namespace FossFoodV1.Orders
 
         private void CompleteOrderActivity_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrEmpty(_orderId))
             new OrderManagerEntity(new ServiceDatesEntity().Current)
                 .AddNewOrder(
                 OrdersViewModels._ordersWithToppings,
@@ -78,6 +83,18 @@ namespace FossFoodV1.Orders
                     CustomerName = OrdersViewModels._customerName,
                     PagerNumber = OrdersViewModels._pagerNumber.Value
                 });
+            else
+            {
+                new OrderManagerEntity(new ServiceDatesEntity().Current)
+                .UpdateOrder(
+                    int.Parse(_orderId),
+                OrdersViewModels._ordersWithToppings,
+                new OrderCustomerDetails
+                {
+                    CustomerName = OrdersViewModels._customerName,
+                    PagerNumber = OrdersViewModels._pagerNumber.Value
+                });
+            }
 
             PrintTicket();
 

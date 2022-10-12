@@ -8,6 +8,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     app:cardElevation="2dp"
+    android:layout_marginBottom="20px"
     android:id="@+id/cardOrderWithToppings">
     <LinearLayout
         android:orientation="vertical"
@@ -51,6 +52,13 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="15px"
             android:id="@+id/customer_name" />
+         <TextView
+            android:text="Pager Number"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="15px"
+            android:id="@+id/order_pager_number" />
         <Button
             android:text="Close Ticket"
             android:backgroundTint="@color/colorAccent"

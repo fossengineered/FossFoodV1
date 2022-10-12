@@ -47,6 +47,7 @@ namespace FossFoodV1.OrderManager
             h.View.FindViewById<TextView>(Resource.Id.order_id).Text = $"Order Number  {item.OrdersId}";
             h.View.FindViewById<TextView>(Resource.Id.customer_name).Text = item.CustomerName;
             h.View.FindViewById<TextView>(Resource.Id.created_on).Text = item.CreatedOn.ToShortTimeString();
+            h.View.FindViewById<TextView>(Resource.Id.order_pager_number).Text = $"Pager Number {item.PagerNumber.ToString()}";
 
             if (_rowStatus == RowStatus.Open)
             {

@@ -71,6 +71,12 @@ namespace FossFoodV1.Orders
 
         }
 
+        internal void Populate(List<OrderWithToppings> ordersWithToppings)
+        {
+            OrdersViewModels._ordersWithToppings = ordersWithToppings;
+            NotifyDataSetChanged();
+        }
+
         private int CalculateHeight(ListView list)
         {
             int height = 0;

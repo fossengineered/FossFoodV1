@@ -24,10 +24,12 @@ namespace FossFoodV1.Orders
         SelectToppingsRecyclerAdapter _toppingAdapter;
         OrdersWithToppingsRecyclerAdapter _orderItemAdapter;
         int _curreOrderItemPosition;
+        RowStatus _rowStatus = RowStatus.Open;
 
         public static string _customerName;
         public static int? _pagerNumber;
         public static List<OrderWithToppings> _ordersWithToppings = new List<OrderWithToppings>();
+        private int _orderId;
 
         public OrdersViewModels(Activity activity)
         {
@@ -42,11 +44,20 @@ namespace FossFoodV1.Orders
 
         internal void PopulateOrder(int orderId)
         {
+            _orderId = orderId;
+
             var order = new OrderManagerEntity(new ServiceDatesEntity().Current).GetOrder(orderId);
+
+            _rowStatus = order.RowStatus;
+
+            if (_rowStatus == RowStatus.Closed)
+                _activity.FindViewById<Button>(Resource.Id.btn_complete_order).Enabled = false;
 
             _activity.FindViewById<EditText>(Resource.Id.order_name).Text = order.CustomerName;
 
             _activity.FindViewById<EditText>(Resource.Id.pager_num).Text = order.PagerNumber.ToString();
+
+            _orderItemAdapter.Populate(order.OrderWithToppings);
         }
 
         public void ClearData()
@@ -87,6 +98,7 @@ namespace FossFoodV1.Orders
             }
 
             var intent = new Intent(_activity.ApplicationContext, typeof(CompleteOrderActivity));
+            intent.PutExtra("order_id", _orderId.ToString());
             _activity.StartActivity(intent);
         }
 
@@ -189,6 +201,8 @@ namespace FossFoodV1.Orders
 
         void HandleOrderItemSelected(OrderWithToppings selectedOrderItem, int position)
         {
+            if (_toppingAdapter == null)
+                _toppingAdapter = InitToppingRecycler(_activity);
 
             _toppingAdapter.OrderItemSelected(selectedOrderItem);
             _curreOrderItemPosition = position;
