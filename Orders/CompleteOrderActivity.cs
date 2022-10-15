@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using XFBluetoothPrint.Droid;
 
 namespace FossFoodV1.Orders
@@ -37,27 +38,27 @@ namespace FossFoodV1.Orders
 
         private void PrintOrder_Click(object sender, EventArgs e)
         {
-            var btPrint = new AndroidBlueToothService();
+            //var btPrint = new AndroidBlueToothService();
 
-            var device = btPrint.GetDeviceList();
+            //var device = btPrint.GetDeviceList();
 
-            if (device == null || device.Count == 0)
-            {
-                Toast.MakeText(ApplicationContext, "No printers found", ToastLength.Short).Show();
-                return;
-            }
+            //if (device == null || device.Count == 0)
+            //{
+            //    Toast.MakeText(ApplicationContext, "No printers found", ToastLength.Short).Show();
+            //    return;
+            //}
 
-            NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+            //NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
 
-            OrdersViewModels._ordersWithToppings.ForEach(order =>
-            {
-                btPrint.Print(device[0], $"{order.OrderItemType.Name} {order.OrderItemType.BasePrice}");
-                order.AvailableToppings.Where(t => t.Selected).ToList().ForEach(topping =>
-                {
-                    var charge = topping.Charge != 0 ? topping.Charge.ToString("C", nfi) : "";
-                    btPrint.Print(device[0], $"{topping.Name} {charge}");
-                });
-            });
+            //OrdersViewModels._ordersWithToppings.ForEach(order =>
+            //{
+            //    btPrint.Print(device[0], $"{order.OrderItemType.Name} {order.OrderItemType.BasePrice}");
+            //    order.AvailableToppings.Where(t => t.Selected).ToList().ForEach(topping =>
+            //    {
+            //        var charge = topping.Charge != 0 ? topping.Charge.ToString("C", nfi) : "";
+            //        btPrint.Print(device[0], $"{topping.Name} {charge}");
+            //    });
+            //});
         }
 
         private void SetOrderTotal()
@@ -74,8 +75,10 @@ namespace FossFoodV1.Orders
 
         private void CompleteOrderActivity_Click(object sender, EventArgs e)
         {
+            OrderManagerOrders order;
+
             if (string.IsNullOrEmpty(_orderId))
-                new OrderManagerEntity(new ServiceDatesEntity().Current)
+                order = new OrderManagerEntity(new ServiceDatesEntity().Current)
                     .AddNewOrder(
                     OrdersViewModels._ordersWithToppings,
                     new OrderCustomerDetails
@@ -85,7 +88,7 @@ namespace FossFoodV1.Orders
                     });
             else
             {
-                new OrderManagerEntity(new ServiceDatesEntity().Current)
+                order=new OrderManagerEntity(new ServiceDatesEntity().Current)
                 .UpdateOrder(
                     int.Parse(_orderId),
                 OrdersViewModels._ordersWithToppings,
@@ -96,51 +99,67 @@ namespace FossFoodV1.Orders
                 });
             }
 
-            PrintTicket();
+            PrintTicket(order);
 
             var intent = new Intent(ApplicationContext, typeof(OrderChecklistActivity));
             intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
             StartActivity(intent);
         }
 
-        private void PrintTicket()
+        private void PrintTicket(OrderManagerOrders order)
         {
             try
             {
+                
                 var btPrint = new AndroidBlueToothService();
 
-                var devices = btPrint.GetDeviceList();
+                //if (devices == null || devices.Count == 0)
+                //{
+                //    Toast.MakeText(ApplicationContext, "No printers found", ToastLength.Short).Show();
+                //    return;
+                //}
 
-                if (devices == null || devices.Count == 0)
+                List<string> lines = new List<string>(50);
+
+                lines.Add("");
+                lines.Add("");
+                lines.Add("");
+
+                NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+
+                lines.Add($"Order # {order.OrdersId}");
+                lines.Add($"{DateTime.Now.ToShortTimeString()}");
+                lines.Add("");
+                lines.Add($"Customer {order.CustomerName}");
+                lines.Add($"Pager #{order.PagerNumber}");
+                lines.Add("");
+
+                OrdersViewModels._ordersWithToppings.ForEach(order =>
                 {
-                    Toast.MakeText(ApplicationContext, "No printers found", ToastLength.Short).Show();
-                    return;
+                    lines.Add("");
+
+                    lines.Add($"{order.OrderItemType.Name}");
+
+                    order.AvailableToppings.Where(t => t.Selected).ToList().ForEach(topping =>
+                    {
+                        var charge = topping.Charge != 0 ? topping.Charge.ToString("C", nfi) : "";
+
+                        var tab = topping.SpecialCallout ? "***" : "   ";
+                        lines.Add($"{tab}{topping.Name}");
+                    });
+                });
+
+                if (lines.Count <=6)
+                {
+                    for (var x = 0; x < 6 - lines.Count; x++)
+                    {
+                        lines.Add("");
+                    }
                 }
 
-                foreach(var device in devices)
-                {
-                    NumberFormatInfo nfi = new CultureInfo("en-US", false).NumberFormat;
+                lines.Add("============END============");
 
-                    btPrint.Print(device, $"{DateTime.Now.ToShortTimeString()}");
-                    btPrint.Print(device, "");
-
-                    OrdersViewModels._ordersWithToppings.ForEach(order =>
-                    {
-                        btPrint.Print(device, "");
-
-                        btPrint.Print(device, $"{order.OrderItemType.Name} -{order.OrderItemType.BasePrice}-");
-
-                        order.AvailableToppings.Where(t => t.Selected).ToList().ForEach(topping =>
-                        {
-                            var charge = topping.Charge != 0 ? topping.Charge.ToString("C", nfi) : "";
-                            btPrint.Print(device, $"   {topping.Name} -{charge}-");
-                        });
-                    });
-
-                    btPrint.Print(device, "");
-                    btPrint.Print(device, "");
-                    btPrint.Print(device, "");
-                }                
+                btPrint.BulkPrint(lines, message=> Toast.MakeText(ApplicationContext, message, ToastLength.Short).Show());
             }
             catch (Exception ex)
             {

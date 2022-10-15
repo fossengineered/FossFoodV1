@@ -31,6 +31,7 @@ namespace FossFoodV1.Food
         public string Name { get; set; }
         public float Charge { get; set; }
         public bool Selected { get; set; }
+        public bool SpecialCallout { get; set; }
     }
 
 }

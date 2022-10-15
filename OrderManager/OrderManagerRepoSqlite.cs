@@ -51,9 +51,12 @@ namespace FossFoodV1.OrderManager
             _db.CreateTable<OrderManagerOrders>();
         }
 
-        internal void AddNewOrder(OrderManagerOrders order)
+        internal OrderManagerOrders AddNewOrder(OrderManagerOrders order)
         {
             _db.Insert(order);
+
+            return order;
+
         }
 
         internal OrderManagerOrders GetOrder(int orderId)
@@ -70,7 +73,7 @@ namespace FossFoodV1.OrderManager
             _db.Update(t);
         }
 
-        internal void UpdateOrder(int orderId, List<OrderWithToppings> ordersWithToppings, OrderCustomerDetails orderCustomerDetails)
+        internal OrderManagerOrders UpdateOrder(int orderId, List<OrderWithToppings> ordersWithToppings, OrderCustomerDetails orderCustomerDetails)
         {
             var t = _db.Get<OrderManagerOrders>(orderId);
 
@@ -79,6 +82,8 @@ namespace FossFoodV1.OrderManager
             t.OrderData = JsonConvert.SerializeObject(ordersWithToppings);
 
             _db.Update(t);
+
+            return t;
         }
 
         internal void ReOpenOrder(int orderId)

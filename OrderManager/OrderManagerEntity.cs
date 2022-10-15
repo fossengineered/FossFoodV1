@@ -27,9 +27,8 @@ namespace FossFoodV1.OrderManager
             _repoSqlite = new OrderManagerRepoSqlite(serviceDate);
         }
 
-        internal void AddNewOrder(List<OrderWithToppings> orderWithToppings, OrderCustomerDetails customerDetails)
-        {
-            _repoSqlite.AddNewOrder(new OrderManagerOrders
+        internal OrderManagerOrders AddNewOrder(List<OrderWithToppings> orderWithToppings, OrderCustomerDetails customerDetails)
+            => _repoSqlite.AddNewOrder(new OrderManagerOrders
             {
                 CustomerName = customerDetails.CustomerName,
                 ServiceDateId = int.Parse(_serviceDate.ToString("yyyyMMdd")),
@@ -38,7 +37,6 @@ namespace FossFoodV1.OrderManager
                 OrderData = JsonConvert.SerializeObject(orderWithToppings),
                 CreatedOn = DateTime.Now
             });
-        }
 
         internal OrderManagerOrders GetOrder(int orderId) => _repoSqlite.GetOrder(orderId);
 
@@ -46,7 +44,7 @@ namespace FossFoodV1.OrderManager
 
         internal void ReOpenOrder(int orderId) => _repoSqlite.ReOpenOrder(orderId);
 
-        internal void UpdateOrder(
+        internal OrderManagerOrders UpdateOrder(
             int orderId,
             List<OrderWithToppings> ordersWithToppings,
             OrderCustomerDetails orderCustomerDetails) =>

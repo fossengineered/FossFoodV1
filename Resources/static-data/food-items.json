@@ -262,7 +262,8 @@
     },
     {
       "Name": "Bacon",
-      "Charge": 1.00
+      "Charge": 1.00,
+      "SpecialCallout":true
     },
     {
       "Name": "Nacho Cheese",
