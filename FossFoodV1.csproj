@@ -72,11 +72,14 @@
     <Compile Include="BtPrinting\Command.cs" />
     <Compile Include="BtPrinting\IBlueToothService.cs" />
     <Compile Include="BtPrinting\PrintPageViewModel.cs" />
+    <Compile Include="Checklist\ChecklistFragment.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Food\FoodActivity.cs" />
     <Compile Include="Food\FoodEntity.cs" />
     <Compile Include="Food\FoodModels.cs" />
     <Compile Include="Food\FoodRenderer.cs" />
+    <Compile Include="MainWrapper\MainWrapperActivity.cs" />
+    <Compile Include="OrderManager\OrderManagerFragment.cs" />
     <Compile Include="OrderManager\OrderManagerActivity.cs" />
     <Compile Include="OrderManager\OrderManagerEntity.cs" />
     <Compile Include="OrderManager\OrderManagerModels.cs" />
@@ -93,8 +96,13 @@
     <Compile Include="Orders\SelectToppingsRecycler.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales\SalesFragment.cs" />
     <Compile Include="ServiceDates\ServiceDatesEntity.cs" />
+    <Compile Include="ServiceDates\ServiceDatesFragment.cs" />
     <Compile Include="ServiceDates\ServiceDatesModels.cs" />
+    <Compile Include="Settings\SettingsFragment.cs" />
+    <Compile Include="Store\StoreFragment.cs" />
+    <Compile Include="Tickets\TicketsFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -234,6 +242,86 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\order_completed_checklist.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\main_wrapper.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_calendar_month_20.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_calendar_month_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_receipt_long_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_slideshow_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\calendar_month.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\outline_bookmark_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\outline_settings_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\_placeholder_service_dates.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\_placeholder_tickets.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\_placeholder_settings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_list_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_check_circle_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_receipt_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_sync_alt_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_backup_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_store_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\_placeholder_checklist.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_restore_page_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_request_page_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\_placeholder_sales.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\_placeholder_store.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

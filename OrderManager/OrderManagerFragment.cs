@@ -1,18 +1,18 @@
-﻿using Android.App;
-using Android.Content;
+﻿using Android.Content;
 using Android.OS;
 using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using AndroidX.Fragment.App;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace FossFoodV1.Backup
+namespace FossFoodV1.OrderManager
 {
-    public class BackupFragment : Fragment
+    public class OrderManagerFragment : Fragment
     {
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -24,9 +24,9 @@ namespace FossFoodV1.Backup
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             // Use this to return your custom view for this Fragment
-            // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
+            return inflater.Inflate(Resource.Layout._placeholder_tickets, container, false);
 
-            return base.OnCreateView(inflater, container, savedInstanceState);
+            //return base.OnCreateView(inflater, container, savedInstanceState);
         }
     }
 }
