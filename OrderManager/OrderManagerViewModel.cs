@@ -103,7 +103,7 @@ namespace FossFoodV1.OrderManager
             orderItemRecycler.SetLayoutManager(layoutManager);
             orderItemRecycler.HasFixedSize = true;
 
-            var adapter = new OrderManagerOrderRecycler(activity, orders, rowStatus, onItemSelected, refreshParent);
+            var adapter = new OrderManagerOrderRecycler(activity, orders, rowStatus, onItemSelected, refreshParent, recyclerId);
 
             orderItemRecycler.SetAdapter(adapter);
             return adapter;

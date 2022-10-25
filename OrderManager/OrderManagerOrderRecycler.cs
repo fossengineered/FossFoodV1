@@ -22,19 +22,22 @@ namespace FossFoodV1.OrderManager
         RowStatus _rowStatus;
         Action<int> _onOrderSelected;
         Action _refreshParent;
+        int _recycler;
 
         public OrderManagerOrderRecycler(
             Activity activity, 
             List<OrderManagerOrders> orders, 
             RowStatus rowStatus,
             Action<int> onOrderSelected,
-            Action refreshParent)
+            Action refreshParent,
+            int recycler)
         {
             _activity = activity;
             _orders = orders;
             _rowStatus = rowStatus;
             _onOrderSelected = onOrderSelected;
             _refreshParent = refreshParent;
+            _recycler = recycler;
         }
 
         public override int ItemCount => _orders.Count;
@@ -79,7 +82,7 @@ namespace FossFoodV1.OrderManager
 
         private void ViewClosedOrder_Click(object sender, EventArgs e)
         {
-            var p = _activity.FindViewById<RecyclerView>(Resource.Id.recycler_closed_orders);
+            var p = _activity.FindViewById<RecyclerView>(_recycler);
             var r = ((View)sender).Parent.Parent.Parent;
 
             int position = p.GetChildAdapterPosition((View)r);
@@ -89,7 +92,7 @@ namespace FossFoodV1.OrderManager
 
         private void ViewOpenOrder_Click(object sender, EventArgs e)
         {
-            var p = _activity.FindViewById<RecyclerView>(Resource.Id.recycler_open_orders);
+            var p = _activity.FindViewById<RecyclerView>(_recycler);
             var r = ((View)sender).Parent.Parent.Parent;
 
             int position = p.GetChildAdapterPosition((View)r);
@@ -99,12 +102,14 @@ namespace FossFoodV1.OrderManager
 
         private void CloseTicket_Click(object sender, EventArgs e)
         {
-            var p = _activity.FindViewById<RecyclerView>(Resource.Id.recycler_open_orders);
+            var p = _activity.FindViewById<RecyclerView>(_recycler);
             var r = ((View)((Button)sender).Parent).Parent;
 
             int position = p.GetChildAdapterPosition((View)r);
 
             new OrderManagerEntity(new ServiceDatesEntity().Current).CloseOrder(_orders[position].OrdersId);
+
+            _orders.RemoveAt(position);
 
             _refreshParent();
 
@@ -113,7 +118,7 @@ namespace FossFoodV1.OrderManager
 
         private void ReOpenTicket_Click(object sender, EventArgs e)
         {
-            var p = _activity.FindViewById<RecyclerView>(Resource.Id.recycler_open_orders);
+            var p = _activity.FindViewById<RecyclerView>(_recycler);
             var r = ((View)((Button)sender).Parent).Parent;
 
             int position = p.GetChildAdapterPosition((View)r);

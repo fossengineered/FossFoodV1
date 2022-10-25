@@ -22,6 +22,7 @@
 
 	<style name="NavHeaderTitle">
 		<item name="android:textSize">@dimen/nav_header_title_text</item>
+		<item name="android:textColor">@color/colorBgWhite</item>
 	</style>
 
 	<style name="AppTheme.NoActionBar">
