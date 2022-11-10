@@ -37,7 +37,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
-    <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
+    <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
@@ -72,7 +72,11 @@
     <Compile Include="BtPrinting\Command.cs" />
     <Compile Include="BtPrinting\IBlueToothService.cs" />
     <Compile Include="BtPrinting\PrintPageViewModel.cs" />
+    <Compile Include="Checklist\ChecklistEntity.cs" />
     <Compile Include="Checklist\ChecklistFragment.cs" />
+    <Compile Include="Checklist\ChecklistModels.cs" />
+    <Compile Include="Checklist\ChecklistRecycler.cs" />
+    <Compile Include="Checklist\ChecklistRepoSqlite.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Food\FoodActivity.cs" />
     <Compile Include="Food\FoodEntity.cs" />
@@ -329,6 +333,23 @@
     <AndroidResource Include="Resources\layout\__card_view.xml">
       <SubType>Designer</SubType>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_done_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_close_fullscreen_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\baseline_close_24.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\checklist_item.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\xml\file_paths.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
