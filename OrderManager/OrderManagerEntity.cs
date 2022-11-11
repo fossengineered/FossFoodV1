@@ -49,5 +49,10 @@ namespace FossFoodV1.OrderManager
             List<OrderWithToppings> ordersWithToppings,
             OrderCustomerDetails orderCustomerDetails) =>
                 _repoSqlite.UpdateOrder(orderId, ordersWithToppings, orderCustomerDetails);
+
+        internal List<OrderManagerOrders> GetOrders()
+        {
+            return _repoSqlite.GetOrders(_serviceDate);
+        }
     }
 }

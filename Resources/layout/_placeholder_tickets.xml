@@ -16,11 +16,14 @@
         android:layout_gravity="bottom|end"
         >
         <Button
+            android:textColor="@android:color/black"
             android:text="View Closed Tickets"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:minWidth="25px"
             android:minHeight="25px"
+            app:strokeColor="@android:color/black"
+            app:strokeWidth="1dp" 
             android:id="@+id/button1" />
         
         </LinearLayout>

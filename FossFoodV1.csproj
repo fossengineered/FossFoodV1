@@ -100,7 +100,9 @@
     <Compile Include="Orders\SelectToppingsRecycler.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sales\SalesEntity.cs" />
     <Compile Include="Sales\SalesFragment.cs" />
+    <Compile Include="Sales\SalesRepoSqlite.cs" />
     <Compile Include="ServiceDates\ServiceDatesEntity.cs" />
     <Compile Include="ServiceDates\ServiceDatesFragment.cs" />
     <Compile Include="ServiceDates\ServiceDatesModels.cs" />
@@ -350,6 +352,11 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\xml\file_paths.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\sales_report_row.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

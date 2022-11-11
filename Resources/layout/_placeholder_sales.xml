@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:minWidth="25px"
+    android:minHeight="25px"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/linearLayout1">
     <TextView
-        android:text="Sales"
+        android:text="No sales for the selected date range"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:id="@+id/textView1" />
+    <ListView
         android:minWidth="25px"
         android:minHeight="25px"
-        android:id="@+id/textView1" />
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lv_sales_report">
+    </ListView>
 </LinearLayout>

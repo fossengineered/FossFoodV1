@@ -94,5 +94,14 @@ namespace FossFoodV1.OrderManager
 
             _db.Update(t);
         }
+
+        internal List<OrderManagerOrders> GetOrders(DateTime serviceDate)
+        {
+            var sd = int.Parse(serviceDate.ToString("yyyyMMdd"));
+
+            var m = _db.Table<OrderManagerOrders>().Where(x => x.ServiceDateId == sd).OrderBy(a => a.ServiceDateId);
+
+            return m.ToList();
+        }
     }
 }
