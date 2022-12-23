@@ -13,5 +13,6 @@ namespace FossFoodV1.Sales
 {
     internal class SalesEntity
     {
+
     }
 }

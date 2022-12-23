@@ -29,37 +29,33 @@ namespace FossFoodV1.MainWrapper
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.main_wrapper);
 
-            ChangeScreen<ServiceDatesFragment>("Service Dates");
+            var extra = Intent.GetIntExtra(Extras.NAV_PAGE, (int)NavPages.Service_Dates);
 
-            FindViewById<View>(Resource.Id.nav_btn_schedule).Click += (a, b) =>
-                ChangeScreen<ServiceDatesFragment>("Service Dates");
+            ChangePage((NavPages)extra);
 
-            FindViewById<View>(Resource.Id.nav_btn_tickets).Click += (a, b) =>
-                ChangeScreen<TicketsFragment>("Tickets");
+            FindViewById<View>(Resource.Id.nav_btn_schedule).Click += (a, b) => ChangePage(NavPages.Service_Dates);
 
-            FindViewById<View>(Resource.Id.nav_btn_checklist).Click += (a, b) =>
-                ChangeScreen<ChecklistFragment>("Checklist");
+            FindViewById<View>(Resource.Id.nav_btn_tickets).Click += (a, b) => ChangePage(NavPages.Tickets);
 
-            FindViewById<View>(Resource.Id.nav_btn_sales).Click += (a, b) =>
-               ChangeScreen<SalesFragment>("Sales");
+            FindViewById<View>(Resource.Id.nav_btn_checklist).Click += (a, b) => ChangePage(NavPages.Checklist);
 
-            FindViewById<View>(Resource.Id.nav_btn_store).Click += (a, b) =>
-               ChangeScreen<StoreFragment>("Store");
+            FindViewById<View>(Resource.Id.nav_btn_sales).Click += (a, b) => ChangePage(NavPages.Sales);
 
-            FindViewById<View>(Resource.Id.nav_btn_settings).Click += (a, b) =>
-                ChangeScreen<SettingsFragment>("Settings");
+            FindViewById<View>(Resource.Id.nav_btn_store).Click += (a, b) => ChangePage(NavPages.Store);
+
+            FindViewById<View>(Resource.Id.nav_btn_settings).Click += (a, b) => ChangePage(NavPages.Settings);
         }
 
-        private void ChangeScreen<T>(string title) where T : new()
+        private void ChangePage(NavPages page)
         {
             SupportFragmentManager.BeginTransaction()
               .SetReorderingAllowed(true)
-              .Replace(Resource.Id.main_content, new T() as AndroidX.Fragment.App.Fragment)
+              .Replace(Resource.Id.main_content, page.GetFragment())
               .Commit();
 
             var tv = FindViewById<TextView>(Resource.Id.nav_header_title);
             tv.Typeface = Typeface.DefaultBold;
-            tv.Text = title;
+            tv.Text = page.GetTitle();
         }
     }
 }

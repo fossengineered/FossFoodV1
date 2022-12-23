@@ -83,6 +83,7 @@
     <Compile Include="Food\FoodModels.cs" />
     <Compile Include="Food\FoodRenderer.cs" />
     <Compile Include="MainWrapper\MainWrapperActivity.cs" />
+    <Compile Include="MainWrapper\MainWrapperModels.cs" />
     <Compile Include="OrderManager\OrderManagerFragment.cs" />
     <Compile Include="OrderManager\OrderManagerActivity.cs" />
     <Compile Include="OrderManager\OrderManagerEntity.cs" />

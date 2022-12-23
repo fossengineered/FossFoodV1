@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using FossFoodV1.MainWrapper;
 using FossFoodV1.OrderManager;
 using System;
 using System.Collections.Generic;
@@ -26,8 +27,9 @@ namespace FossFoodV1.Orders
 
         private void OrderChecklistActivity_Click(object sender, EventArgs e)
         {
-            var intent = new Intent(ApplicationContext, typeof(OrderManagerActivity));
+            var intent = new Intent(ApplicationContext, typeof(MainWrapperActivity));
             intent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTask);
+            intent.PutExtra(Extras.NAV_PAGE, (int)NavPages.Tickets);
             StartActivity(intent);
         }
     }
