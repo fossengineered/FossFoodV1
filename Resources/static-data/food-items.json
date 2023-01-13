@@ -12,16 +12,20 @@
         "Chili",
         "Nacho Cheese",
         "Jalapeno",
-        "Bacon"
+        "Bacon",
+        "Pickles",
+        "Nacho Cheese(On Side Fries)",
+        "Chili(On Side Fries)"
       ],
       "AutoSelected": [
         "Ketchup",
         "Mustard",
         "Mayo",
         "Lettuce",
-        "Tomato"
+        "Tomato",
+        "Pickles"
       ],
-      "BasePrice": 11.00
+      "BasePrice": 14.00
     },
     {
       "Name": "Burger (The Single)",
@@ -35,12 +39,15 @@
         "Chili",
         "Nacho Cheese",
         "Jalapeno",
-        "Bacon"
+        "Bacon",
+        "Pickles",
+        "Nacho Cheese(On Side Fries)",
+        "Chili(On Side Fries)"
       ],
       "AutoSelected": [
         "Ketchup"
       ],
-      "BasePrice": 9.00
+      "BasePrice": 12.00
     },
     {
       "Name": "Burger (The Bacon Smash)",
@@ -54,14 +61,17 @@
         "Chili",
         "Nacho Cheese",
         "Jalapeno",
-        "Bacon"
+        "Bacon",
+        "Pickles",
+        "Nacho Cheese(On Side Fries)",
+        "Chili(On Side Fries)"
       ],
       "AutoSelected": [
         "Ketchup",
         "Mayo",
         "Bacon"
       ],
-      "BasePrice": 10.00
+      "BasePrice": 12.00
     },
     {
       "Name": "Burger (The Jalapeno)",
@@ -75,16 +85,43 @@
         "Chili",
         "Nacho Cheese",
         "Jalapeno",
-        "Bacon"
+        "Bacon",
+        "Pickles",
+        "Nacho Cheese(On Side Fries)",
+        "Chili(On Side Fries)"
       ],
       "AutoSelected": [
         "Jalapeno",
         "Nacho Cheese"
       ],
-      "BasePrice": 11.00
+      "BasePrice": 13.00
     },
     {
-      "Name": "Hot Dog",
+      "Name": "Burger (The Homer)",
+      "Toppings": [
+        "Ketchup",
+        "Mustard",
+        "Mayo",
+        "Lettuce",
+        "Tomato",
+        "Onion",
+        "Chili",
+        "Nacho Cheese",
+        "Jalapeno",
+        "Bacon",
+        "Pickles",
+        "Nacho Cheese(On Side Fries)",
+        "Chili(On Side Fries)"
+      ],
+      "AutoSelected": [
+        "Ketchup",
+        "Mayo",
+        "Bacon"
+      ],
+      "BasePrice": 13.00
+    },
+    {
+      "Name": "Hot Dog x 1",
       "Toppings": [
         "Ketchup",
         "Mustard",
@@ -92,12 +129,14 @@
         "Onion",
         "Nacho Cheese",
         "Jalapeno",
-        "Chili"
+        "Chili",
+        "Nacho Cheese(On Side Fries)",
+        "Chili(On Side Fries)"
       ],
-      "BasePrice": 9.00
+      "BasePrice": 8.00
     },
     {
-      "Name": "Hot Dog (Chili/Cheese)",
+      "Name": "Hot Dog x 1 (Chili/Cheese)",
       "Toppings": [
         "Ketchup",
         "Mustard",
@@ -109,14 +148,50 @@
       "AutoSelected": [
         "Nacho Cheese",
         "Jalapeno",
+        "Chili",
+        "Nacho Cheese(On Side Fries)",
+        "Chili(On Side Fries)"
+      ],
+      "BasePrice": 8.00
+    },
+    {
+      "Name": "Hot Dog x 2",
+      "Toppings": [
+        "Ketchup",
+        "Mustard",
+        "Mayo",
+        "Onion",
+        "Nacho Cheese",
+        "Jalapeno",
+        "Chili",
+        "Nacho Cheese(On Side Fries)",
+        "Chili(On Side Fries)"
+      ],
+      "BasePrice": 12.00
+    },
+    {
+      "Name": "Hot Dog x 2 (Chili/Cheese)",
+      "Toppings": [
+        "Ketchup",
+        "Mustard",
+        "Mayo",
+        "Onion",
+        "Nacho Cheese",
+        "Chili",
+        "Nacho Cheese(On Side Fries)",
+        "Chili(On Side Fries)"
+      ],
+      "AutoSelected": [
+        "Nacho Cheese",
+        "Jalapeno",
         "Chili"
       ],
-      "BasePrice": 9.00
+      "BasePrice": 12.00
     },
     {
       "Name": "Fries",
       "Toppings": [],
-      "BasePrice": 5.00
+      "BasePrice": 7.00
     },
     {
       "Name": "Fries (Chilli/Cheese) ",
@@ -129,7 +204,7 @@
         "Chili",
         "Nacho Cheese"
       ],
-      "BasePrice": 5.00
+      "BasePrice": 7.00
     },
     {
       "Name": "Fries(Nacho)",
@@ -142,17 +217,17 @@
         "Jalapeno",
         "Nacho Cheese"
       ],
-      "BasePrice": 5.00
+      "BasePrice": 7.00
     },
     {
-      "Name": "Funnel Cake (Original)",
+      "Name": "Funnel Cake (Classic)",
       "Toppings": [
         "Powdered Sugar"
       ],
       "AutoSelected": [
         "Powdered Sugar"
       ],
-      "BasePrice": 7.00
+      "BasePrice": 8.00
     },
     {
       "Name": "Funnel Cake (Strawberries & Cream)",
@@ -166,7 +241,7 @@
         "Whipped Cream",
         "Strawberries"
       ],
-      "BasePrice": 8.00
+      "BasePrice": 9.00
     },
     {
       "Name": "Funnel Cake (Caramel Apple)",
@@ -182,23 +257,7 @@
         "Apples",
         "Caramel"
       ],
-      "BasePrice": 8.00
-    },
-    {
-      "Name": "Funnel Cake (The Spooky One)",
-      "Toppings": [
-        "Powdered Sugar",
-        "Whipped Cream",
-        "Chocolate",
-        "Sprinkles"
-      ],
-      "AutoSelected": [
-        "Powdered Sugar",
-        "Whipped Cream",
-        "Chocolate",
-        "Sprinkles"
-      ],
-      "BasePrice": 8.00
+      "BasePrice": 9.00
     },
     {
       "Name": "Funnel Cake (Fruity Pebbles)",
@@ -214,7 +273,7 @@
         "Fruity Pebbles",
         "Fruity Pebbles Syrup"
       ],
-      "BasePrice": 8.00
+      "BasePrice": 10.00
     },
     {
       "Name": "Fried Oreos (6)",
@@ -227,14 +286,6 @@
         "Chocolate"
       ],
       "BasePrice": 8.00
-    },
-    {
-      "Name": "Soda",
-      "BasePrice": 1.00
-    },
-    {
-      "Name": "Water",
-      "BasePrice": 1.00
     },
     {
       "Name": "Soda/Drink",
@@ -262,8 +313,8 @@
     },
     {
       "Name": "Bacon",
-      "Charge": 1.00,
-      "SpecialCallout":true
+      "Charge": 2.00,
+      "SpecialCallout": true
     },
     {
       "Name": "Nacho Cheese",
@@ -271,6 +322,9 @@
     },
     {
       "Name": "Jalapeno"
+    },
+    {
+      "Name": "Pickles"
     },
     {
       "Name": "Sunny Side Up Egg",
@@ -283,6 +337,16 @@
     {
       "Name": "Chili",
       "Charge": 1.00
+    },
+    {
+      "Name": "Nacho Cheese(On Side Fries)",
+      "Charge": 1.00,
+      "SpecialCallout": true      
+    },
+    {
+      "Name": "Chili(On Side Fries)",
+      "Charge": 1.00,
+      "SpecialCallout": true
     },
     {
       "Name": "Powdered Sugar"
@@ -315,6 +379,19 @@
     {
       "Name": "Fruity Pebbles Syrup"
     }
+  ],
+  "Consumables": [
+    "Clamshell",
+    "Gloves",
+    "Wax Paper",
+    "HotDog Buns",
+    "Burger Buns",
+    "Donuts",
+    "Potatoes",
+    "Soda",
+    "Water",
+    "Oreos",
+    "Sugar Cookie Mix",
+    "Funnel Cake Mix"
   ]
 }
-
